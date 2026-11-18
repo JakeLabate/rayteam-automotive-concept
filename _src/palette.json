@@ -1,0 +1,138 @@
+{
+  "tokens": {
+    "black": "#000000",
+    "text": "#1f1f1f",
+    "paper": "#ffffff",
+    "floor": "#eceeef",
+    "gold": "#ffcf00",
+    "red": "#e02b20",
+    "steel": "#50565c",
+    "ash": "#c2c7cb",
+    "mist": "#d3d7da",
+    "ink": "#000000",
+    "muted": "#50565c",
+    "brand": "#ffcf00",
+    "brand-ink": "#000000"
+  },
+  "pairs": [
+    {
+      "fg": "text",
+      "bg": "paper",
+      "use": "body copy"
+    },
+    {
+      "fg": "text",
+      "bg": "floor",
+      "use": "body copy on grey bands"
+    },
+    {
+      "fg": "black",
+      "bg": "paper",
+      "use": "headings"
+    },
+    {
+      "fg": "black",
+      "bg": "floor",
+      "use": "headings on grey bands"
+    },
+    {
+      "fg": "black",
+      "bg": "gold",
+      "use": "hero headline, sign panels, primary button label"
+    },
+    {
+      "fg": "text",
+      "bg": "gold",
+      "use": "hero supporting copy"
+    },
+    {
+      "fg": "steel",
+      "bg": "paper",
+      "use": "secondary text"
+    },
+    {
+      "fg": "steel",
+      "bg": "floor",
+      "use": "secondary text on grey bands"
+    },
+    {
+      "fg": "paper",
+      "bg": "black",
+      "use": "reversed text, staging notice, footer"
+    },
+    {
+      "fg": "ash",
+      "bg": "black",
+      "use": "secondary text on black, footer disclosure"
+    },
+    {
+      "fg": "gold",
+      "bg": "black",
+      "use": "links and figures on black"
+    },
+    {
+      "fg": "red",
+      "bg": "black",
+      "use": "stripe and status dot on black",
+      "role": "ui"
+    },
+    {
+      "fg": "red",
+      "bg": "paper",
+      "use": "stripe and marks on white",
+      "role": "ui"
+    },
+    {
+      "fg": "red",
+      "bg": "floor",
+      "use": "stripe and marks on grey",
+      "role": "ui"
+    },
+    {
+      "fg": "red",
+      "bg": "gold",
+      "use": "exit-sign slash on gold",
+      "role": "ui"
+    },
+    {
+      "fg": "black",
+      "bg": "paper",
+      "use": "sign borders, focus ring",
+      "role": "ui"
+    },
+    {
+      "fg": "black",
+      "bg": "gold",
+      "use": "focus ring on gold",
+      "role": "ui"
+    },
+    {
+      "fg": "gold",
+      "bg": "black",
+      "use": "focus ring on black",
+      "role": "ui"
+    },
+    {
+      "fg": "paper",
+      "bg": "black",
+      "use": "borders on black",
+      "role": "ui"
+    },
+    {
+      "fg": "black",
+      "bg": "mist",
+      "use": "text on inactive chip"
+    },
+    {
+      "fg": "paper",
+      "bg": "red",
+      "use": "large numerals on red",
+      "size": "large"
+    },
+    {
+      "fg": "brand-ink",
+      "bg": "brand",
+      "use": "share card text on gold (aliases of black on gold)"
+    }
+  ]
+}

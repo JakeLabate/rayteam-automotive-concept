@@ -1,0 +1,68 @@
+{
+  "entries": [
+    {
+      "family": "Sofia Sans Extra Condensed",
+      "package": "sofia-sans-extra-condensed",
+      "variable": false,
+      "faces": [
+        {
+          "file": "sofia-sans-extra-condensed-latin-700-normal.woff2",
+          "weight": "700"
+        },
+        {
+          "file": "sofia-sans-extra-condensed-latin-800-normal.woff2",
+          "weight": "800"
+        }
+      ],
+      "fallback": "arial",
+      "metrics": {
+        "upem": 1000,
+        "ascent": 900,
+        "descent": -300,
+        "gap": 0,
+        "avg": 291.7
+      },
+      "overrides": {
+        "size-adjust": "66.53%",
+        "ascent-override": "135.29%",
+        "descent-override": "45.10%",
+        "line-gap-override": "0.00%"
+      },
+      "stack": "'Sofia Sans Extra Condensed', 'Sofia Sans Extra Condensed Fallback', Arial, sans-serif"
+    },
+    {
+      "family": "Sofia Sans",
+      "package": "sofia-sans",
+      "variable": false,
+      "faces": [
+        {
+          "file": "sofia-sans-latin-400-normal.woff2",
+          "weight": "400"
+        },
+        {
+          "file": "sofia-sans-latin-600-normal.woff2",
+          "weight": "600"
+        },
+        {
+          "file": "sofia-sans-latin-700-normal.woff2",
+          "weight": "700"
+        }
+      ],
+      "fallback": "arial",
+      "metrics": {
+        "upem": 1000,
+        "ascent": 900,
+        "descent": -300,
+        "gap": 0,
+        "avg": 424.9
+      },
+      "overrides": {
+        "size-adjust": "96.90%",
+        "ascent-override": "92.88%",
+        "descent-override": "30.96%",
+        "line-gap-override": "0.00%"
+      },
+      "stack": "'Sofia Sans', 'Sofia Sans Fallback', Arial, sans-serif"
+    }
+  ]
+}

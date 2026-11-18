@@ -1,0 +1,92 @@
+{
+  "template": "1",
+  "style": "brand",
+  "base_url": "https://rayteam.jakelabate.com/",
+  "pages": {
+    "about.html": {
+      "image": "img/og/about.png",
+      "fingerprint": "92b1e62323210795",
+      "title": "About RayTeam Automotive | Waltham German Auto Shop"
+    },
+    "audi-repair.html": {
+      "image": "img/og/audi-repair.png",
+      "fingerprint": "1fde2c556adb98f6",
+      "title": "Audi Repair in Waltham, MA | RayTeam Automotive"
+    },
+    "bmw-repair.html": {
+      "image": "img/og/bmw-repair.png",
+      "fingerprint": "8cafa829d3acaf27",
+      "title": "BMW Repair in Waltham, MA | RayTeam Automotive"
+    },
+    "contact.html": {
+      "image": "img/og/contact.png",
+      "fingerprint": "09fb7ce71c553c9e",
+      "title": "Contact and Directions | RayTeam Automotive, Waltham"
+    },
+    "faq.html": {
+      "image": "img/og/faq.png",
+      "fingerprint": "fef82252c2817d50",
+      "title": "German Auto Repair FAQ | RayTeam Automotive, Waltham"
+    },
+    "index.html": {
+      "image": "img/og/index.png",
+      "fingerprint": "8ec467cf7992d119",
+      "title": "RayTeam Automotive | German Auto Repair in Waltham, MA"
+    },
+    "jaguar-repair.html": {
+      "image": "img/og/jaguar-repair.png",
+      "fingerprint": "c7f07788375a3a0e",
+      "title": "Jaguar Repair in Waltham, MA | RayTeam Automotive"
+    },
+    "land-rover-repair.html": {
+      "image": "img/og/land-rover-repair.png",
+      "fingerprint": "662bec8bc1ada358",
+      "title": "Land Rover Repair in Waltham, MA | RayTeam Automotive"
+    },
+    "makes.html": {
+      "image": "img/og/makes.png",
+      "fingerprint": "4b289bd6d96ea58a",
+      "title": "European Makes We Service in Waltham | RayTeam Automotive"
+    },
+    "mercedes-benz-repair.html": {
+      "image": "img/og/mercedes-benz-repair.png",
+      "fingerprint": "ead4f79a97557bce",
+      "title": "Mercedes-Benz Repair in Waltham, MA | RayTeam Automotive"
+    },
+    "mini-repair.html": {
+      "image": "img/og/mini-repair.png",
+      "fingerprint": "a8ef32365829b7cb",
+      "title": "MINI Repair in Waltham, MA | RayTeam Automotive"
+    },
+    "motorsport.html": {
+      "image": "img/og/motorsport.png",
+      "fingerprint": "a6c64d0bb1c02aea",
+      "title": "RayTeam Motorsport | Pikes Peak Hill Climb Race Team"
+    },
+    "porsche-repair.html": {
+      "image": "img/og/porsche-repair.png",
+      "fingerprint": "42683f64fa0f04e7",
+      "title": "Porsche Repair in Waltham, MA | RayTeam Automotive"
+    },
+    "services.html": {
+      "image": "img/og/services.png",
+      "fingerprint": "ecddca4d2b58fc93",
+      "title": "Auto Repair Services for German Cars | RayTeam Automotive"
+    },
+    "tuning.html": {
+      "image": "img/og/tuning.png",
+      "fingerprint": "1dc01c6bda5b12b2",
+      "title": "Unitronic Tuning in Waltham, MA | RayTeam Automotive"
+    },
+    "volkswagen-repair.html": {
+      "image": "img/og/volkswagen-repair.png",
+      "fingerprint": "35f2fe281607c686",
+      "title": "Volkswagen Repair in Waltham, MA | RayTeam Automotive"
+    },
+    "volvo-repair.html": {
+      "image": "img/og/volvo-repair.png",
+      "fingerprint": "5a9736cda412b64b",
+      "title": "Volvo Repair in Waltham, MA | RayTeam Automotive"
+    }
+  }
+}
