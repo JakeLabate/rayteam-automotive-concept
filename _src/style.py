@@ -152,6 +152,30 @@ p{max-width:68ch}
 .cards2 li{padding:18px 0;border-top:1px solid var(--black)}
 .cards2 a{font-weight:700;color:var(--black)}
 
+/* photography: the shop's own pictures, framed like the sign panels */
+.shot img{width:100%;height:auto;border:var(--rule) solid var(--black);border-radius:var(--radius);background:var(--floor)}
+.shot figcaption{margin-top:10px}
+.on-black .shot img{border-color:var(--paper)}
+.strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--rule);background:var(--black);border-block:var(--rule) solid var(--black)}
+.strip img{width:100%;height:100%;aspect-ratio:3/4;object-fit:cover}
+.photos3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,2vw,24px)}
+.photos3 img{aspect-ratio:4/3;object-fit:cover}
+.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,2vw,24px)}
+.gallery img{aspect-ratio:1;object-fit:cover}
+.page-hero--media .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr);gap:clamp(28px,5vw,72px);align-items:center}
+.page-hero--media .crumbs{grid-column:1/-1;margin-bottom:0}
+.video__link{display:block;position:relative;aspect-ratio:16/9;border:var(--rule) solid var(--black);border-radius:var(--radius);overflow:hidden;background:var(--black)}
+.video__link img{width:100%;height:100%;object-fit:cover}
+.video__play{position:absolute;left:50%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;background:var(--gold);border:var(--rule) solid var(--black)}
+.video__play::after{content:"";position:absolute;left:27px;top:19px;border-style:solid;border-width:16px 0 16px 24px;border-color:transparent transparent transparent var(--black)}
+.video__link:hover .video__play,.video__link:focus-visible .video__play{background:var(--paper)}
+.video iframe{display:block;width:100%;aspect-ratio:16/9;border:var(--rule) solid var(--black);border-radius:var(--radius);background:var(--black)}
+.video figcaption{margin-top:12px;font-weight:700;color:var(--black)}
+.on-black .video figcaption{color:var(--paper)}
+.on-black .video__link,.on-black .video iframe{border-color:var(--paper)}
+.videos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,36px)}
+.feature{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:center}
+
 /* black bands */
 .on-black{background:var(--black);color:var(--paper)}
 .on-black h2,.on-black h3,.on-black .display{color:var(--paper)}
@@ -223,7 +247,12 @@ p{max-width:68ch}
   .nav a{padding:10px 8px}
 }
 @media (max-width:900px){
-  .hero .wrap,.finder,.split,.split--even,.split--prose,.svc,.foot__grid{grid-template-columns:1fr}
+  .hero .wrap,.finder,.split,.split--even,.split--prose,.svc,.foot__grid,.page-hero--media .wrap,.feature{grid-template-columns:1fr}
+  .videos{grid-template-columns:1fr}
+  .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .photos3{grid-template-columns:1fr}
+  .strip{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:62%;overflow-x:auto;scroll-snap-type:x mandatory}
+  .strip li{scroll-snap-align:start}
   .index,.cards2{grid-template-columns:1fr}
   .facts{grid-template-columns:1fr}
   .facts dd{border-top:0;padding-top:0}

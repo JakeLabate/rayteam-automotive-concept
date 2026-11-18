@@ -177,6 +177,30 @@ p{max-width:68ch}
 .cards2 li{padding:18px 0;border-top:1px solid var(--black)}
 .cards2 a{font-weight:700;color:var(--black)}
 
+/* photography: the shop's own pictures, framed like the sign panels */
+.shot img{width:100%;height:auto;border:var(--rule) solid var(--black);border-radius:var(--radius);background:var(--floor)}
+.shot figcaption{margin-top:10px}
+.on-black .shot img{border-color:var(--paper)}
+.strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--rule);background:var(--black);border-block:var(--rule) solid var(--black)}
+.strip img{width:100%;height:100%;aspect-ratio:3/4;object-fit:cover}
+.photos3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,2vw,24px)}
+.photos3 img{aspect-ratio:4/3;object-fit:cover}
+.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,2vw,24px)}
+.gallery img{aspect-ratio:1;object-fit:cover}
+.page-hero--media .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr);gap:clamp(28px,5vw,72px);align-items:center}
+.page-hero--media .crumbs{grid-column:1/-1;margin-bottom:0}
+.video__link{display:block;position:relative;aspect-ratio:16/9;border:var(--rule) solid var(--black);border-radius:var(--radius);overflow:hidden;background:var(--black)}
+.video__link img{width:100%;height:100%;object-fit:cover}
+.video__play{position:absolute;left:50%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;background:var(--gold);border:var(--rule) solid var(--black)}
+.video__play::after{content:"";position:absolute;left:27px;top:19px;border-style:solid;border-width:16px 0 16px 24px;border-color:transparent transparent transparent var(--black)}
+.video__link:hover .video__play,.video__link:focus-visible .video__play{background:var(--paper)}
+.video iframe{display:block;width:100%;aspect-ratio:16/9;border:var(--rule) solid var(--black);border-radius:var(--radius);background:var(--black)}
+.video figcaption{margin-top:12px;font-weight:700;color:var(--black)}
+.on-black .video figcaption{color:var(--paper)}
+.on-black .video__link,.on-black .video iframe{border-color:var(--paper)}
+.videos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,36px)}
+.feature{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:center}
+
 /* black bands */
 .on-black{background:var(--black);color:var(--paper)}
 .on-black h2,.on-black h3,.on-black .display{color:var(--paper)}
@@ -248,7 +272,12 @@ p{max-width:68ch}
   .nav a{padding:10px 8px}
 }
 @media (max-width:900px){
-  .hero .wrap,.finder,.split,.split--even,.split--prose,.svc,.foot__grid{grid-template-columns:1fr}
+  .hero .wrap,.finder,.split,.split--even,.split--prose,.svc,.foot__grid,.page-hero--media .wrap,.feature{grid-template-columns:1fr}
+  .videos{grid-template-columns:1fr}
+  .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .photos3{grid-template-columns:1fr}
+  .strip{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:62%;overflow-x:auto;scroll-snap-type:x mandatory}
+  .strip li{scroll-snap-align:start}
   .index,.cards2{grid-template-columns:1fr}
   .facts{grid-template-columns:1fr}
   .facts dd{border-top:0;padding-top:0}
@@ -349,9 +378,10 @@ p{max-width:68ch}
 <div class="flag" aria-hidden="true"></div>
 </header>
 <main id="main">
-<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li aria-current="page">Services</li></ol></nav>
-<h1>Services for German and European cars</h1>
-<p class="lede">RayTeam Automotive handles routine maintenance, diagnosis, and major repairs at 175 High Street in Waltham. Approved repairs carry a 24-month, 24,000-mile warranty.</p>
+<section class="page-hero page-hero--media"><div class="wrap"><nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li aria-current="page">Services</li></ol></nav>
+<div><h1>Services for German and European cars</h1>
+<p class="lede">RayTeam Automotive handles routine maintenance, diagnosis, and major repairs at 175 High Street in Waltham. Approved repairs carry a 24-month, 24,000-mile warranty.</p></div>
+<figure class="shot"><img src="img/photos/brake-caliper.webp" alt="A red brake caliper and drilled rotor on a car raised on a lift with its wheel off" width="700" height="560" fetchpriority="high"></figure>
 </div></section>
 <section class="band"><div class="wrap">
 <nav aria-label="Services on this page"><ul class="jump"><li><a href="#check-engine-light">Check engine light diagnosis</a></li><li><a href="#diagnostic-inspection">Diagnostic inspection</a></li><li><a href="#oil-change">Oil change service</a></li><li><a href="#oil-leak-repair">Oil leak repair</a></li><li><a href="#scheduled-maintenance">Scheduled maintenance</a></li><li><a href="#brakes-clutch">Brake and clutch service</a></li><li><a href="#suspension">Suspension repair</a></li><li><a href="#transmission">Transmission repair</a></li><li><a href="#engine-repair">Engine repair</a></li><li><a href="#electrical">Electrical repair</a></li><li><a href="#ac-repair">A/C repair</a></li><li><a href="#coding">Programming and coding</a></li><li><a href="#carbon-cleaning">Carbon cleaning</a></li><li><a href="#dsg-service">DSG service</a></li><li><a href="#fluid-services">Fluid services</a></li><li><a href="#water-damage">Water damage repair</a></li><li><a href="#warranty-claims">Aftermarket warranty work</a></li></ul></nav>
@@ -359,6 +389,11 @@ p{max-width:68ch}
 <section class="band" style="padding-top:0" aria-labelledby="h-core"><div class="wrap">
 <div class="head"><h2 id="h-core">Repair and maintenance</h2></div>
 <div class="svc" id="check-engine-light"><div><h3>Check engine light diagnosis</h3></div><div class="stack"><p>A check engine light means the car has already stored a fault. RayTeam reads it with factory-level diagnostic equipment and builds a test plan before recommending a repair, so you pay for the fix and not for guesses.</p><p>The causes the shop lists most often are aftermarket parts, faulty oxygen sensors, original spark plugs and coils, fuel system faults, and electrical malfunctions. A flashing light means the engine is misfiring: ease off and have it looked at soon.</p></div></div><div class="svc" id="diagnostic-inspection"><div><h3>Diagnostic inspection</h3></div><div class="stack"><p>A diagnostic inspection covers four things: the on-board fault memory, software and control module verification, live data while the car runs, and testing of the individual component the data points to.</p><p>Book one when a warning light is on, when you hear a new noise, or when the car runs rough, loses performance, or shows an electrical fault.</p></div></div><div class="svc" id="oil-change"><div><h3>Oil change service</h3></div><div class="stack"><p>RayTeam uses LIQUI MOLY full-synthetic German oil, and only that. The shop&#x27;s position is plain: bargain oil does not protect a high-compression engine, wears seals early, and costs more in the end.</p><p>An oil service is also when a technician gets eyes on the rest of the car, which is how small leaks and worn parts get caught early.</p></div></div><div class="svc" id="oil-leak-repair"><div><h3>Oil leak repair</h3></div><div class="stack"><p>Rubber gaskets harden with engine heat and start to seep. The usual sources on German engines are the valve cover gasket, the oil filter housing gasket, the oil cooler seals, and the rear main seal.</p><p>The shop leak-tests to find where the oil starts, replaces the failed gasket with an OEM part, and brings the oil level back to full. Signs to watch for: a burning-oil smell, smoke under the hood, spots on the driveway, or a low-oil warning.</p></div></div><div class="svc" id="scheduled-maintenance"><div><h3>Scheduled maintenance</h3></div><div class="stack"><p>Scheduled maintenance at RayTeam covers oil changes, fluid services, inspections, brake maintenance, and the items specific to your make and model.</p><p>Staying on schedule is the cheapest way to own a European car. It keeps small wear from turning into a repair.</p></div></div><div class="svc" id="brakes-clutch"><div><h3>Brake and clutch service</h3></div><div class="stack"><p>RayTeam fits OEM and OE-specification German-branded brake parts and hardware. Brake fluid matters as much as pads and rotors: the shop measures the moisture in your fluid and changes it when the reading calls for it.</p><p>Clutch work is handled in the same bays. Come in if the pedal feels soft, the brakes squeal or grind, or the clutch slips or engages late.</p></div></div><div class="svc" id="suspension"><div><h3>Suspension repair</h3></div><div class="stack"><p>The shop diagnoses and repairs struts, bushings, control arms, and air suspension systems.</p><p>Four signs mean the suspension needs attention: the car keeps bouncing after a bump, the tires wear unevenly, you hear knocks or rattles on rough roads, or the car sits low on one side.</p></div></div><div class="svc" id="transmission"><div><h3>Transmission repair</h3></div><div class="stack"><p>Transmission work runs from fluid maintenance to repairs, including service for the DSG dual-clutch gearboxes in Audi and Volkswagen models.</p><p>Slipping, delayed engagement, harsh shifts, or a transmission warning on the dash are reasons to book a diagnosis before you drive much further.</p></div></div><div class="svc" id="engine-repair"><div><h3>Engine repair</h3></div><div class="stack"><p>Engine work at RayTeam covers timing chains, gasket leaks, cooling system faults, and carbon cleaning, from diagnosis through repair, replacement, or rebuild.</p><p>The diagnosis comes first. Factory diagnostic equipment and a test plan tell the technician what failed before anything comes apart.</p></div></div><div class="svc" id="electrical"><div><h3>Electrical repair</h3></div><div class="stack"><p>Modern German cars run on networks of control modules, and a weak battery or one bad sensor can set off faults across several of them. RayTeam traces battery, wiring, sensor, and module faults with factory-level diagnostics.</p><p>A new battery on many of these cars has to be registered or coded to the car. The shop does that step as part of the job.</p></div></div><div class="svc" id="ac-repair"><div><h3>A/C repair</h3></div><div class="stack"><p>RayTeam diagnoses A/C leaks, compressor faults, and systems that no longer cool the way they should.</p><p>The A/C also dries the air that clears your windshield, so a weak system shows up on wet mornings as glass that will not defog.</p></div></div>
+<ul class="photos3" style="margin-top:clamp(32px,4vw,56px)">
+<li><figure class="shot"><img src="img/photos/land-rover-alignment.webp" alt="A black Land Rover Discovery Sport on an alignment rack with sensors on its wheels" width="933" height="700" loading="lazy" decoding="async"></figure></li>
+<li><figure class="shot"><img src="img/photos/range-rover-wheel-off.webp" alt="A white Range Rover on a lift with a front wheel and fender liner removed" width="933" height="700" loading="lazy" decoding="async"></figure></li>
+<li><figure class="shot"><img src="img/photos/range-rover-engine-bay.webp" alt="The engine bay of a Range Rover Sport with its hood open" width="800" height="600" loading="lazy" decoding="async"></figure></li>
+</ul>
 </div></section>
 <section class="band band--floor" aria-labelledby="h-spec"><div class="wrap">
 <div class="head"><h2 id="h-spec">Specialty work</h2>
@@ -413,6 +448,9 @@ if(mb)mb.addEventListener('click',function(){var on=nav.classList.toggle('is-ope
 var cl=d.querySelectorAll('.climb');
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target)}})},{threshold:.4});
 cl.forEach(function(x){io.observe(x)})}else{cl.forEach(function(x){x.classList.add('is-in')})}
+d.querySelectorAll('[data-yt]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();
+var f=d.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+a.getAttribute('data-yt')+'?autoplay=1&rel=0';
+f.title=a.getAttribute('data-title');f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;a.parentNode.replaceChild(f,a)})});
 var m=d.querySelector('[data-map]');
 if(m)m.querySelector('button').addEventListener('click',function(){m.classList.add('is-live');
 m.innerHTML='<iframe title="Map showing RayTeam Automotive at 175 High Street, Waltham" loading="lazy" src="'+m.getAttribute('data-map')+'"></iframe>'});

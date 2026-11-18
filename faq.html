@@ -177,6 +177,30 @@ p{max-width:68ch}
 .cards2 li{padding:18px 0;border-top:1px solid var(--black)}
 .cards2 a{font-weight:700;color:var(--black)}
 
+/* photography: the shop's own pictures, framed like the sign panels */
+.shot img{width:100%;height:auto;border:var(--rule) solid var(--black);border-radius:var(--radius);background:var(--floor)}
+.shot figcaption{margin-top:10px}
+.on-black .shot img{border-color:var(--paper)}
+.strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--rule);background:var(--black);border-block:var(--rule) solid var(--black)}
+.strip img{width:100%;height:100%;aspect-ratio:3/4;object-fit:cover}
+.photos3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,2vw,24px)}
+.photos3 img{aspect-ratio:4/3;object-fit:cover}
+.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,2vw,24px)}
+.gallery img{aspect-ratio:1;object-fit:cover}
+.page-hero--media .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr);gap:clamp(28px,5vw,72px);align-items:center}
+.page-hero--media .crumbs{grid-column:1/-1;margin-bottom:0}
+.video__link{display:block;position:relative;aspect-ratio:16/9;border:var(--rule) solid var(--black);border-radius:var(--radius);overflow:hidden;background:var(--black)}
+.video__link img{width:100%;height:100%;object-fit:cover}
+.video__play{position:absolute;left:50%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;background:var(--gold);border:var(--rule) solid var(--black)}
+.video__play::after{content:"";position:absolute;left:27px;top:19px;border-style:solid;border-width:16px 0 16px 24px;border-color:transparent transparent transparent var(--black)}
+.video__link:hover .video__play,.video__link:focus-visible .video__play{background:var(--paper)}
+.video iframe{display:block;width:100%;aspect-ratio:16/9;border:var(--rule) solid var(--black);border-radius:var(--radius);background:var(--black)}
+.video figcaption{margin-top:12px;font-weight:700;color:var(--black)}
+.on-black .video figcaption{color:var(--paper)}
+.on-black .video__link,.on-black .video iframe{border-color:var(--paper)}
+.videos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,36px)}
+.feature{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:center}
+
 /* black bands */
 .on-black{background:var(--black);color:var(--paper)}
 .on-black h2,.on-black h3,.on-black .display{color:var(--paper)}
@@ -248,7 +272,12 @@ p{max-width:68ch}
   .nav a{padding:10px 8px}
 }
 @media (max-width:900px){
-  .hero .wrap,.finder,.split,.split--even,.split--prose,.svc,.foot__grid{grid-template-columns:1fr}
+  .hero .wrap,.finder,.split,.split--even,.split--prose,.svc,.foot__grid,.page-hero--media .wrap,.feature{grid-template-columns:1fr}
+  .videos{grid-template-columns:1fr}
+  .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .photos3{grid-template-columns:1fr}
+  .strip{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:62%;overflow-x:auto;scroll-snap-type:x mandatory}
+  .strip li{scroll-snap-align:start}
   .index,.cards2{grid-template-columns:1fr}
   .facts{grid-template-columns:1fr}
   .facts dd{border-top:0;padding-top:0}
@@ -355,7 +384,8 @@ p{max-width:68ch}
 </div></section>
 <section class="band"><div class="wrap split">
 <div class="stack"><h2>Answers</h2>
-<p>Still unsure? Call <a href="tel:+17812091400">(781) 209-1400</a> and describe what the car is doing.</p></div>
+<p>Still unsure? Call <a href="tel:+17812091400">(781) 209-1400</a> and describe what the car is doing.</p>
+<figure class="shot"><img src="img/photos/shop-bays.webp" alt="Cars raised on two-level lifts in RayTeam&#x27;s service bays" width="438" height="292" loading="lazy" decoding="async"></figure></div>
 <div class="faq"><details><summary>Which makes does RayTeam Automotive service?</summary><div><p>Audi, BMW, Mercedes-Benz, Porsche, Volkswagen, MINI, Land Rover, Jaguar, and Volvo. The shop has specialized in German cars since 2009.</p></div></details><details><summary>Is RayTeam an alternative to the dealership?</summary><div><p>Yes. RayTeam is an independent shop with factory diagnostic equipment, OEM parts, and a 24-month, 24,000-mile warranty on approved repairs.</p></div></details><details><summary>Do you use OEM parts?</summary><div><p>OEM parts come first on every car. Where an aftermarket part is used, it is one that exceeds the manufacturer&#x27;s recommendation.</p></div></details><details><summary>What warranty comes with a repair?</summary><div><p>Approved repairs carry a 24-month, 24,000-mile warranty.</p></div></details><details><summary>Do you work with extended or aftermarket warranties?</summary><div><p>Yes, with all aftermarket warranty companies. The shop handles the claim and reports a 99.9% success rate in getting claims approved.</p></div></details><details><summary>What oil do you use?</summary><div><p>LIQUI MOLY full-synthetic German oil, on every oil service.</p></div></details><details><summary>Can you service DSG transmissions on Audi and Volkswagen?</summary><div><p>Yes. A DSG service replaces the fluid, filters, and o-rings, and the shop recommends it every 40,000 miles.</p></div></details><details><summary>My check engine light is on. What should I do?</summary><div><p>Book a diagnostic scan. The light means a fault is stored, and the scan and test plan find the cause before any part is replaced. If the light is flashing, ease off and come in soon.</p></div></details><details><summary>When should I book a diagnostic inspection?</summary><div><p>When a warning light comes on, when you hear an unusual noise, or when the car runs rough, loses performance, or shows an electrical fault.</p></div></details><details><summary>Which symptoms need attention right away?</summary><div><p>Dashboard warning lights, new engine or transmission noises, rough idling, trouble starting, brake noise, fluid leaks, and unusual vibration.</p></div></details><details><summary>What should I do if the car overheats while driving?</summary><div><p>Pull over safely and shut the engine off. Then call the shop at (781) 209-1400 so a technician can inspect it.</p></div></details><details><summary>Do you carry out scheduled maintenance?</summary><div><p>Yes: oil changes, fluid services, inspections, brake maintenance, and the service items specific to your make and model.</p></div></details><details><summary>Can you fix oil leaks?</summary><div><p>Yes. The shop leak-tests to find the source and repairs it with OEM parts.</p></div></details><details><summary>Do you work on older European cars?</summary><div><p>Yes. The shop has the tools and equipment to service and repair older high-end European cars.</p></div></details><details><summary>Do you serve drivers outside Waltham?</summary><div><p>Yes. The shop is 3.4 miles from Watertown, 3.9 miles from Newton, 6 miles from downtown Boston, and 8.3 miles from Cambridge, and Brookline drivers come in too.</p></div></details><details><summary>How do I book?</summary><div><p>Book online through the shop&#x27;s scheduling page, or call (781) 209-1400 during opening hours.</p></div></details></div>
 </div></section>
 <section class="cta" aria-label="Book or call"><div class="wrap">
@@ -406,6 +436,9 @@ if(mb)mb.addEventListener('click',function(){var on=nav.classList.toggle('is-ope
 var cl=d.querySelectorAll('.climb');
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target)}})},{threshold:.4});
 cl.forEach(function(x){io.observe(x)})}else{cl.forEach(function(x){x.classList.add('is-in')})}
+d.querySelectorAll('[data-yt]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();
+var f=d.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+a.getAttribute('data-yt')+'?autoplay=1&rel=0';
+f.title=a.getAttribute('data-title');f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;a.parentNode.replaceChild(f,a)})});
 var m=d.querySelector('[data-map]');
 if(m)m.querySelector('button').addEventListener('click',function(){m.classList.add('is-live');
 m.innerHTML='<iframe title="Map showing RayTeam Automotive at 175 High Street, Waltham" loading="lazy" src="'+m.getAttribute('data-map')+'"></iframe>'});

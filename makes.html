@@ -177,6 +177,30 @@ p{max-width:68ch}
 .cards2 li{padding:18px 0;border-top:1px solid var(--black)}
 .cards2 a{font-weight:700;color:var(--black)}
 
+/* photography: the shop's own pictures, framed like the sign panels */
+.shot img{width:100%;height:auto;border:var(--rule) solid var(--black);border-radius:var(--radius);background:var(--floor)}
+.shot figcaption{margin-top:10px}
+.on-black .shot img{border-color:var(--paper)}
+.strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--rule);background:var(--black);border-block:var(--rule) solid var(--black)}
+.strip img{width:100%;height:100%;aspect-ratio:3/4;object-fit:cover}
+.photos3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,2vw,24px)}
+.photos3 img{aspect-ratio:4/3;object-fit:cover}
+.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,2vw,24px)}
+.gallery img{aspect-ratio:1;object-fit:cover}
+.page-hero--media .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr);gap:clamp(28px,5vw,72px);align-items:center}
+.page-hero--media .crumbs{grid-column:1/-1;margin-bottom:0}
+.video__link{display:block;position:relative;aspect-ratio:16/9;border:var(--rule) solid var(--black);border-radius:var(--radius);overflow:hidden;background:var(--black)}
+.video__link img{width:100%;height:100%;object-fit:cover}
+.video__play{position:absolute;left:50%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;background:var(--gold);border:var(--rule) solid var(--black)}
+.video__play::after{content:"";position:absolute;left:27px;top:19px;border-style:solid;border-width:16px 0 16px 24px;border-color:transparent transparent transparent var(--black)}
+.video__link:hover .video__play,.video__link:focus-visible .video__play{background:var(--paper)}
+.video iframe{display:block;width:100%;aspect-ratio:16/9;border:var(--rule) solid var(--black);border-radius:var(--radius);background:var(--black)}
+.video figcaption{margin-top:12px;font-weight:700;color:var(--black)}
+.on-black .video figcaption{color:var(--paper)}
+.on-black .video__link,.on-black .video iframe{border-color:var(--paper)}
+.videos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,36px)}
+.feature{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:center}
+
 /* black bands */
 .on-black{background:var(--black);color:var(--paper)}
 .on-black h2,.on-black h3,.on-black .display{color:var(--paper)}
@@ -248,7 +272,12 @@ p{max-width:68ch}
   .nav a{padding:10px 8px}
 }
 @media (max-width:900px){
-  .hero .wrap,.finder,.split,.split--even,.split--prose,.svc,.foot__grid{grid-template-columns:1fr}
+  .hero .wrap,.finder,.split,.split--even,.split--prose,.svc,.foot__grid,.page-hero--media .wrap,.feature{grid-template-columns:1fr}
+  .videos{grid-template-columns:1fr}
+  .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .photos3{grid-template-columns:1fr}
+  .strip{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:62%;overflow-x:auto;scroll-snap-type:x mandatory}
+  .strip li{scroll-snap-align:start}
   .index,.cards2{grid-template-columns:1fr}
   .facts{grid-template-columns:1fr}
   .facts dd{border-top:0;padding-top:0}
@@ -349,13 +378,19 @@ p{max-width:68ch}
 <div class="flag" aria-hidden="true"></div>
 </header>
 <main id="main">
-<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li aria-current="page">Makes</li></ol></nav>
-<h1>Makes we service in Waltham</h1>
-<p class="lede">RayTeam Automotive has specialized in German cars since 2009 and services nine European makes. Each page covers the faults the shop sees most on that make and how it repairs them.</p>
+<section class="page-hero page-hero--media"><div class="wrap"><nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li aria-current="page">Makes</li></ol></nav>
+<div><h1>Makes we service in Waltham</h1>
+<p class="lede">RayTeam Automotive has specialized in German cars since 2009 and services nine European makes. Each page covers the faults the shop sees most on that make and how it repairs them.</p></div>
+<figure class="shot"><img src="img/photos/shop-floor.webp" alt="Sports cars parked on the polished shop floor between rows of red lifts" width="500" height="500" fetchpriority="high"></figure>
 </div></section>
 <section class="band"><div class="wrap">
 <ul class="index"><li><a href="audi-repair.html">Audi repair and service</a><p>Oil consumption, timing chains, and S tronic gearboxes.</p></li><li><a href="bmw-repair.html">BMW repair and service</a><p>Gasket leaks, electric water pumps, and carbon buildup.</p></li><li><a href="mercedes-benz-repair.html">Mercedes-Benz repair and service</a><p>AIRMATIC suspension, engine mounts, and conductor plates.</p></li><li><a href="porsche-repair.html">Porsche repair and service</a><p>IMS bearings, PDK gearboxes, and brakes.</p></li><li><a href="volkswagen-repair.html">Volkswagen repair and service</a><p>Carbon buildup, electrical faults, and coolant leaks.</p></li><li><a href="mini-repair.html">MINI repair and service</a><p>Cooling systems, turbochargers, and timing chains.</p></li><li><a href="land-rover-repair.html">Land Rover repair and service</a><p>Air suspension, fluid leaks, and electrical faults.</p></li><li><a href="jaguar-repair.html">Jaguar repair and service</a><p>Misfires, transmission faults, and cooling systems.</p></li><li><a href="volvo-repair.html">Volvo repair and service</a><p>Oil service, brakes, batteries, and suspension checks.</p></li></ul>
 <p class="small" style="margin-top:28px">The shop holds factory diagnostic and repair equipment for Audi, BMW, Mercedes-Benz, and Volkswagen, and uses Porsche's factory tester on Porsche gearbox faults.</p>
+<ul class="photos3" style="margin-top:clamp(32px,4vw,56px)">
+<li><figure class="shot"><img src="img/photos/porsche-gt2rs.webp" alt="Rear of a yellow Porsche 911 GT2 RS raised on a lift" width="499" height="499" loading="lazy" decoding="async"></figure></li>
+<li><figure class="shot"><img src="img/photos/bmw-bay.webp" alt="A black BMW sedan in a service bay with a white sedan on the lift behind it" width="499" height="499" loading="lazy" decoding="async"></figure></li>
+<li><figure class="shot"><img src="img/photos/audi-rs3-bay.webp" alt="Rear quarter of a grey Audi RS 3 in the shop with its door open" width="499" height="499" loading="lazy" decoding="async"></figure></li>
+</ul>
 </div></section>
 <section class="cta" aria-label="Book or call"><div class="wrap">
 <h2>Bring the car in.</h2>
@@ -405,6 +440,9 @@ if(mb)mb.addEventListener('click',function(){var on=nav.classList.toggle('is-ope
 var cl=d.querySelectorAll('.climb');
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target)}})},{threshold:.4});
 cl.forEach(function(x){io.observe(x)})}else{cl.forEach(function(x){x.classList.add('is-in')})}
+d.querySelectorAll('[data-yt]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();
+var f=d.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+a.getAttribute('data-yt')+'?autoplay=1&rel=0';
+f.title=a.getAttribute('data-title');f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;a.parentNode.replaceChild(f,a)})});
 var m=d.querySelector('[data-map]');
 if(m)m.querySelector('button').addEventListener('click',function(){m.classList.add('is-live');
 m.innerHTML='<iframe title="Map showing RayTeam Automotive at 175 High Street, Waltham" loading="lazy" src="'+m.getAttribute('data-map')+'"></iframe>'});

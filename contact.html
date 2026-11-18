@@ -177,6 +177,30 @@ p{max-width:68ch}
 .cards2 li{padding:18px 0;border-top:1px solid var(--black)}
 .cards2 a{font-weight:700;color:var(--black)}
 
+/* photography: the shop's own pictures, framed like the sign panels */
+.shot img{width:100%;height:auto;border:var(--rule) solid var(--black);border-radius:var(--radius);background:var(--floor)}
+.shot figcaption{margin-top:10px}
+.on-black .shot img{border-color:var(--paper)}
+.strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--rule);background:var(--black);border-block:var(--rule) solid var(--black)}
+.strip img{width:100%;height:100%;aspect-ratio:3/4;object-fit:cover}
+.photos3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,2vw,24px)}
+.photos3 img{aspect-ratio:4/3;object-fit:cover}
+.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,2vw,24px)}
+.gallery img{aspect-ratio:1;object-fit:cover}
+.page-hero--media .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr);gap:clamp(28px,5vw,72px);align-items:center}
+.page-hero--media .crumbs{grid-column:1/-1;margin-bottom:0}
+.video__link{display:block;position:relative;aspect-ratio:16/9;border:var(--rule) solid var(--black);border-radius:var(--radius);overflow:hidden;background:var(--black)}
+.video__link img{width:100%;height:100%;object-fit:cover}
+.video__play{position:absolute;left:50%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;background:var(--gold);border:var(--rule) solid var(--black)}
+.video__play::after{content:"";position:absolute;left:27px;top:19px;border-style:solid;border-width:16px 0 16px 24px;border-color:transparent transparent transparent var(--black)}
+.video__link:hover .video__play,.video__link:focus-visible .video__play{background:var(--paper)}
+.video iframe{display:block;width:100%;aspect-ratio:16/9;border:var(--rule) solid var(--black);border-radius:var(--radius);background:var(--black)}
+.video figcaption{margin-top:12px;font-weight:700;color:var(--black)}
+.on-black .video figcaption{color:var(--paper)}
+.on-black .video__link,.on-black .video iframe{border-color:var(--paper)}
+.videos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,36px)}
+.feature{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:center}
+
 /* black bands */
 .on-black{background:var(--black);color:var(--paper)}
 .on-black h2,.on-black h3,.on-black .display{color:var(--paper)}
@@ -248,7 +272,12 @@ p{max-width:68ch}
   .nav a{padding:10px 8px}
 }
 @media (max-width:900px){
-  .hero .wrap,.finder,.split,.split--even,.split--prose,.svc,.foot__grid{grid-template-columns:1fr}
+  .hero .wrap,.finder,.split,.split--even,.split--prose,.svc,.foot__grid,.page-hero--media .wrap,.feature{grid-template-columns:1fr}
+  .videos{grid-template-columns:1fr}
+  .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .photos3{grid-template-columns:1fr}
+  .strip{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:62%;overflow-x:auto;scroll-snap-type:x mandatory}
+  .strip li{scroll-snap-align:start}
   .index,.cards2{grid-template-columns:1fr}
   .facts{grid-template-columns:1fr}
   .facts dd{border-top:0;padding-top:0}
@@ -418,10 +447,11 @@ p{max-width:68ch}
 <div class="flag" aria-hidden="true"></div>
 </header>
 <main id="main">
-<section class="page-hero"><div class="wrap"><nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li aria-current="page">Contact</li></ol></nav>
-<h1>Contact RayTeam Automotive</h1>
+<section class="page-hero page-hero--media"><div class="wrap"><nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li aria-current="page">Contact</li></ol></nav>
+<div><h1>Contact RayTeam Automotive</h1>
 <p class="lede">Call, book online, or come by 175 High Street in Waltham. Describe what the car is doing and the shop will tell you what it takes to fix it.</p>
-<div class="actions" style="margin-top:28px"><a class="btn" href="tel:+17812091400">Call (781) 209-1400</a><a class="btn btn--line" href="https://booking.tekmetric.com/?shop=8cb3e219-cbdf-453a-a087-3080e95ab321">Book service online</a><a class="btn btn--line" href="https://www.google.com/maps/search/?api=1&query=RayTeam+Automotive%2C+175+High+St%2C+Waltham%2C+MA+02453">Get directions</a></div>
+<div class="actions" style="margin-top:28px"><a class="btn" href="tel:+17812091400">Call (781) 209-1400</a><a class="btn btn--line" href="https://booking.tekmetric.com/?shop=8cb3e219-cbdf-453a-a087-3080e95ab321">Book service online</a><a class="btn btn--line" href="https://www.google.com/maps/search/?api=1&query=RayTeam+Automotive%2C+175+High+St%2C+Waltham%2C+MA+02453">Get directions</a></div></div>
+<figure class="shot"><img src="img/photos/shop-sign-audi.webp" alt="A grey Audi parked outside the shop, with the RayTeam Automotive sign behind it" width="500" height="500" fetchpriority="high"><figcaption class="small">The sign out front.</figcaption></figure>
 </div></section>
 <section class="band"><div class="wrap split split--even">
 <div><aside class="sign" aria-label="Opening hours and address">
@@ -482,6 +512,9 @@ if(mb)mb.addEventListener('click',function(){var on=nav.classList.toggle('is-ope
 var cl=d.querySelectorAll('.climb');
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target)}})},{threshold:.4});
 cl.forEach(function(x){io.observe(x)})}else{cl.forEach(function(x){x.classList.add('is-in')})}
+d.querySelectorAll('[data-yt]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();
+var f=d.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+a.getAttribute('data-yt')+'?autoplay=1&rel=0';
+f.title=a.getAttribute('data-title');f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;a.parentNode.replaceChild(f,a)})});
 var m=d.querySelector('[data-map]');
 if(m)m.querySelector('button').addEventListener('click',function(){m.classList.add('is-live');
 m.innerHTML='<iframe title="Map showing RayTeam Automotive at 175 High Street, Waltham" loading="lazy" src="'+m.getAttribute('data-map')+'"></iframe>'});

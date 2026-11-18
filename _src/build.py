@@ -17,6 +17,27 @@ from style import CSS        # noqa: E402
 
 SITE = os.path.join(HERE, "..")   # the repo root is the published site
 AREAS = ["Waltham", "Newton", "Cambridge", "Brookline", "Watertown"]
+DIMS = json.load(open(os.path.join(HERE, "photo-dims.json")))
+
+
+def img(name, alt, eager=False):
+    """One of the shop's own photos, vendored into img/photos. See photos.py."""
+    w, h = DIMS[name]
+    load = ' fetchpriority="high"' if eager else ' loading="lazy" decoding="async"'
+    return f'<img src="img/photos/{name}.webp" alt="{html.escape(alt, quote=True)}" width="{w}" height="{h}"{load}>'
+
+
+def shot(name, alt, caption=None, eager=False):
+    cap = f'<figcaption class="small">{html.escape(caption)}</figcaption>' if caption else ""
+    return f'<figure class="shot">{img(name, alt, eager)}{cap}</figure>'
+
+
+def video(vid, title, poster, alt):
+    """Click-to-load YouTube embed from the shop's own channel. Works as a plain link without JS."""
+    t = html.escape(title, quote=True)
+    return (f'<figure class="video"><a class="video__link" href="https://www.youtube.com/watch?v={vid}" data-yt="{vid}" '
+            f'data-title="{t}" aria-label="Play video: {t}">{img(poster, alt)}<span class="video__play" aria-hidden="true"></span></a>'
+            f'<figcaption>{t}</figcaption></figure>')
 
 
 def esc(s):
@@ -101,6 +122,9 @@ if(mb)mb.addEventListener('click',function(){var on=nav.classList.toggle('is-ope
 var cl=d.querySelectorAll('.climb');
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target)}})},{threshold:.4});
 cl.forEach(function(x){io.observe(x)})}else{cl.forEach(function(x){x.classList.add('is-in')})}
+d.querySelectorAll('[data-yt]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();
+var f=d.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+a.getAttribute('data-yt')+'?autoplay=1&rel=0';
+f.title=a.getAttribute('data-title');f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;a.parentNode.replaceChild(f,a)})});
 var m=d.querySelector('[data-map]');
 if(m)m.querySelector('button').addEventListener('click',function(){m.classList.add('is-live');
 m.innerHTML='<iframe title="Map showing RayTeam Automotive at 175 High Street, Waltham" loading="lazy" src="'+m.getAttribute('data-map')+'"></iframe>'});
@@ -269,6 +293,16 @@ def svc_block(sid, name, summary, paras, when, level="h3"):
     return f"""<div class="svc" id="{sid}"><div><{level}>{esc(name)}</{level}>{w}</div><div class="stack">{body}</div></div>"""
 
 
+def media_hero(crumbs, h1, lede, photo, actions=True, eager=True):
+    act = (f'<div class="actions" style="margin-top:28px"><a class="btn" href="{c.TEL_HREF}">Call {c.TEL_HUMAN}</a>'
+           f'<a class="btn btn--line" href="{c.BOOK}">Book service online</a></div>') if actions else ""
+    return f"""<section class="page-hero page-hero--media"><div class="wrap">{crumbs_html(crumbs)}
+<div><h1>{esc(h1)}</h1>
+<p class="lede">{esc(lede)}</p>{act}</div>
+{shot(photo[0], photo[1], eager=eager)}
+</div></section>"""
+
+
 def home():
     title = "RayTeam Automotive | German Auto Repair in Waltham, MA"
     desc = ("Independent German and European auto repair at 175 High Street, Waltham, since 2009. "
@@ -282,6 +316,12 @@ def home():
         for s in c.SYMPTOMS)
     svc = "".join(f'<li><a href="services.html#{s[0]}">{esc(s[1])}</a><p>{esc(s[2])}</p></li>' for s in c.SERVICES + c.SPECIALTY)
     journal = "".join(f'<li><a href="{j[4]}">{esc(j[2])}</a><p>{j[1]}, {j[3]}</p></li>' for j in c.JOURNAL)
+    strip = "".join("<li>" + img(n, a, eager=True).replace(' fetchpriority="high"', "") + "</li>" for n, a in [
+        ("shop-mercedes-sl", "A classic Mercedes-Benz SL parked beside the RayTeam logo painted on the shop floor"),
+        ("shop-aisle", "Looking down the shop: lifts on both sides, a red and black checkered floor, and cars in the bays"),
+        ("shop-porsche-gt3rs", "A green Porsche 911 GT3 RS on a lift with a technician working underneath"),
+        ("shop-audi-rs3-tall", "Rear quarter of a grey Audi RS 3 in the shop with its door open"),
+        ("shop-jaguar-etype", "A dark green Jaguar E-Type roadster on the shop floor")])
     body = f"""<section class="hero"><div class="wrap">
 <div>
 <h1>German and European auto repair in Waltham, MA</h1>
@@ -290,6 +330,7 @@ def home():
 </div>
 {hours_sign()}
 </div></section>
+<ul class="strip" aria-label="Inside the RayTeam shop">{strip}</ul>
 
 <section class="band" aria-labelledby="h-makes"><div class="wrap">
 <div class="head"><h2 id="h-makes">Makes we service</h2>
@@ -310,12 +351,18 @@ def home():
 <div class="head"><h2 id="h-services">Services</h2>
 <p class="lede">Routine maintenance, diagnosis, and major repairs, all done in the shop's own service building.</p></div>
 <ul class="index">{svc}</ul>
+<ul class="photos3" style="margin-top:clamp(32px,4vw,56px)">
+<li>{shot("brake-caliper", "A red brake caliper and drilled rotor on a car raised on a lift with its wheel off")}</li>
+<li>{shot("land-rover-alignment", "A black Land Rover Discovery Sport on an alignment rack with sensors on its wheels")}</li>
+<li>{shot("range-rover-engine-bay", "The engine bay of a Range Rover Sport with its hood open")}</li>
+</ul>
 </div></section>
 
 <section class="band band--floor" aria-labelledby="h-dealer"><div class="wrap split">
 <div class="stack"><h2 id="h-dealer">Dealer-level work without the dealership</h2>
 <p>What an independent shop needs to match a dealer is equipment, parts, and a warranty that says it stands behind both. Here is what RayTeam puts on the record.</p>
-<p><a href="about.html">About the shop</a></p></div>
+<p><a href="about.html">About the shop</a></p>
+{shot("audi-liqui-moly", "A grey Audi RS with its hood open beside shelves of LIQUI MOLY oil")}</div>
 <dl class="facts">
 <dt>Diagnostics</dt><dd>Factory diagnostic and repair equipment for Audi, BMW, Mercedes-Benz, and Volkswagen, built up over more than 15 years, including module coding.</dd>
 <dt>Parts</dt><dd>OEM and OE-specification parts.</dd>
@@ -329,8 +376,8 @@ def home():
 <section class="band on-black" aria-labelledby="h-race"><div class="wrap split split--even">
 <div class="stack"><h2 id="h-race">The shop that raced Pikes Peak</h2>
 <p class="lede">In June 2024 RayTeam Motorsport made its racing debut at the 102nd Pikes Peak International Hill Climb. Laszlo Keskeny drove the team's number 10 Audi Group B tribute car to the summit in 12:57.142.</p>
-<p><a class="btn btn--gold" href="motorsport.html">RayTeam Motorsport</a></p></div>
-<figure>{climb_svg()}</figure>
+<p><a class="btn btn--gold" href="motorsport.html">Race record and videos</a></p></div>
+{shot("race-front", "The number 10 Audi Group B tribute car at speed on a wooded hill climb road")}
 </div></section>
 
 <section class="band" aria-labelledby="h-journal"><div class="wrap split">
@@ -348,7 +395,8 @@ def home():
 <section class="band" aria-labelledby="h-visit"><div class="wrap split split--even">
 <div class="stack"><h2 id="h-visit">Six miles from downtown Boston</h2>
 <p class="lede">The shop is at 175 High Street in Waltham and draws drivers from Newton, Watertown, Cambridge, Brookline, and Boston.</p>
-<div class="actions"><a class="btn" href="{c.MAPS}">Get directions</a><a class="btn btn--line" href="contact.html">Hours and contact</a></div></div>
+<div class="actions"><a class="btn" href="{c.MAPS}">Get directions</a><a class="btn btn--line" href="contact.html">Hours and contact</a></div>
+<div style="max-width:420px;margin-top:28px">{shot("shop-sign-audi", "A grey Audi parked outside the shop, with the RayTeam Automotive sign behind it", "The sign out front.")}</div></div>
 <div>{distance_sign()}</div>
 </div></section>
 {cta()}
@@ -365,16 +413,20 @@ def services():
     jump = "".join(f'<li><a href="#{s[0]}">{esc(s[1])}</a></li>' for s in c.SERVICES + c.SPECIALTY)
     core = "".join(svc_block(*s) for s in c.SERVICES)
     spec = "".join(svc_block(*s) for s in c.SPECIALTY)
-    body = f"""<section class="page-hero"><div class="wrap">{crumbs_html(crumbs)}
-<h1>Services for German and European cars</h1>
-<p class="lede">RayTeam Automotive handles routine maintenance, diagnosis, and major repairs at 175 High Street in Waltham. Approved repairs carry a 24-month, 24,000-mile warranty.</p>
-</div></section>
+    body = media_hero(crumbs, "Services for German and European cars",
+                      "RayTeam Automotive handles routine maintenance, diagnosis, and major repairs at 175 High Street in Waltham. Approved repairs carry a 24-month, 24,000-mile warranty.",
+                      ("brake-caliper", "A red brake caliper and drilled rotor on a car raised on a lift with its wheel off"), actions=False) + f"""
 <section class="band"><div class="wrap">
 <nav aria-label="Services on this page"><ul class="jump">{jump}</ul></nav>
 </div></section>
 <section class="band" style="padding-top:0" aria-labelledby="h-core"><div class="wrap">
 <div class="head"><h2 id="h-core">Repair and maintenance</h2></div>
 {core}
+<ul class="photos3" style="margin-top:clamp(32px,4vw,56px)">
+<li>{shot("land-rover-alignment", "A black Land Rover Discovery Sport on an alignment rack with sensors on its wheels")}</li>
+<li>{shot("range-rover-wheel-off", "A white Range Rover on a lift with a front wheel and fender liner removed")}</li>
+<li>{shot("range-rover-engine-bay", "The engine bay of a Range Rover Sport with its hood open")}</li>
+</ul>
 </div></section>
 <section class="band band--floor" aria-labelledby="h-spec"><div class="wrap">
 <div class="head"><h2 id="h-spec">Specialty work</h2>
@@ -392,13 +444,17 @@ def makes_hub():
             "Jaguar, and Volvo in Waltham, MA. See common faults for your make.")
     crumbs = [(None, "Makes")]
     items = "".join(f'<li><a href="{m[0]}-repair.html">{esc(m[1])} repair and service</a><p>{esc(m[2])}</p></li>' for m in c.MAKES)
-    body = f"""<section class="page-hero"><div class="wrap">{crumbs_html(crumbs)}
-<h1>Makes we service in Waltham</h1>
-<p class="lede">RayTeam Automotive has specialized in German cars since 2009 and services nine European makes. Each page covers the faults the shop sees most on that make and how it repairs them.</p>
-</div></section>
+    body = media_hero(crumbs, "Makes we service in Waltham",
+                      "RayTeam Automotive has specialized in German cars since 2009 and services nine European makes. Each page covers the faults the shop sees most on that make and how it repairs them.",
+                      ("shop-floor", "Sports cars parked on the polished shop floor between rows of red lifts"), actions=False) + f"""
 <section class="band"><div class="wrap">
 <ul class="index">{items}</ul>
 <p class="small" style="margin-top:28px">The shop holds factory diagnostic and repair equipment for Audi, BMW, Mercedes-Benz, and Volkswagen, and uses Porsche's factory tester on Porsche gearbox faults.</p>
+<ul class="photos3" style="margin-top:clamp(32px,4vw,56px)">
+<li>{shot("porsche-gt2rs", "Rear of a yellow Porsche 911 GT2 RS raised on a lift")}</li>
+<li>{shot("bmw-bay", "A black BMW sedan in a service bay with a white sedan on the lift behind it")}</li>
+<li>{shot("audi-rs3-bay", "Rear quarter of a grey Audi RS 3 in the shop with its door open")}</li>
+</ul>
 </div></section>
 {cta()}
 """
@@ -411,19 +467,17 @@ def make_page(m):
     title = f"{name} Repair in Waltham, MA | RayTeam Automotive"
     desc = f"{name} repair in Waltham, MA at RayTeam Automotive. {short} OEM parts and a 24-month repair warranty."
     crumbs = [("makes.html", "Makes"), (None, name)]
+    photos = c.MAKE_PHOTOS[slug]
     iss = "".join(f"<li><h3>{esc(t)}</h3><p>{esc(x)}</p></li>" for t, x in issues)
     lk = "".join(f'<li><a href="{h}">{esc(l)}</a></li>' for h, l in links)
     j = [x for x in c.JOURNAL if x[0] == jkey]
     journal = (f'<p>From the shop journal: <a href="{j[0][4]}">{esc(j[0][2])}</a>, on RayTeam\'s current site.</p>' if j else "")
+    second = f'<div style="margin-top:28px">{shot(*photos[1])}</div>' if len(photos) > 1 else ""
     others = "".join(f'<li><a href="{o[0]}-repair.html">{esc(o[1])}</a></li>' for o in c.MAKES if o[0] != slug)
     extra = [{"@type": "Service", "@id": url(page) + "#service", "name": f"{name} repair and service",
               "serviceType": f"{name} repair", "url": url(page), "provider": {"@id": c.BASE + "#business"},
               "areaServed": [{"@type": "City", "name": a} for a in AREAS]}]
-    body = f"""<section class="page-hero"><div class="wrap">{crumbs_html(crumbs)}
-<h1>{esc(name)} repair and service in Waltham, MA</h1>
-<p class="lede">{esc(lede)}</p>
-<div class="actions" style="margin-top:28px"><a class="btn" href="{c.TEL_HREF}">Call {c.TEL_HUMAN}</a><a class="btn btn--line" href="{c.BOOK}">Book service online</a></div>
-</div></section>
+    body = media_hero(crumbs, f"{name} repair and service in Waltham, MA", lede, photos[0]) + f"""
 <section class="band" aria-labelledby="h-issues"><div class="wrap split">
 <div class="stack"><h2 id="h-issues">{esc(issue_h)}</h2>
 <p>Approved repairs carry a 24-month, 24,000-mile warranty.</p></div>
@@ -433,7 +487,7 @@ def make_page(m):
 <div class="stack"><h2 id="h-svc">Service for your {esc(name)}</h2>
 <p>Every service the shop offers applies to {esc(name)}. These are the ones owners ask about most.</p>
 {journal}</div>
-<div><ul class="index">{lk}<li><a href="services.html">All services</a></li><li><a href="faq.html">Common questions</a></li></ul></div>
+<div><ul class="index">{lk}<li><a href="services.html">All services</a></li><li><a href="faq.html">Common questions</a></li></ul>{second}</div>
 </div></section>
 <section class="band" aria-labelledby="h-other"><div class="wrap">
 <div class="head"><h2 id="h-other">Other makes</h2></div>
@@ -449,10 +503,9 @@ def tuning():
     desc = ("RayTeam Automotive is an authorized Unitronic dealer in Waltham, MA, installing ECU and TCU "
             "software and performance hardware for Audi, Volkswagen, and Porsche.")
     crumbs = [(None, "Tuning")]
-    body = f"""<section class="page-hero"><div class="wrap">{crumbs_html(crumbs)}
-<h1>Unitronic tuning and performance upgrades</h1>
-<p class="lede">RayTeam Automotive is an authorized Unitronic dealer. The shop installs Unitronic engine and transmission software, and the hardware that supports it, for Audi, Volkswagen, and Porsche.</p>
-</div></section>
+    body = media_hero(crumbs, "Unitronic tuning and performance upgrades",
+                      "RayTeam Automotive is an authorized Unitronic dealer. The shop installs Unitronic engine and transmission software, and the hardware that supports it, for Audi, Volkswagen, and Porsche.",
+                      ("shop-audi-lift", "A lowered Audi sedan on a lift, the German tricolor stripe running along the bay wall"), actions=False) + f"""
 <section class="band"><div class="wrap split split--prose">
 <div class="prose">
 <h2>Software</h2>
@@ -465,13 +518,20 @@ def tuning():
 <p>A tuned engine asks more of its oil. RayTeam uses LIQUI MOLY full-synthetic German oil and nothing else.</p>
 <p><a href="https://www.getunitronic.com/locate-a-dealer/Rayteam-Inc">RayTeam's listing in the Unitronic dealer locator</a></p>
 </div>
-<dl class="facts">
+<div><dl class="facts">
 <dt>Dealer status</dt><dd>Authorized Unitronic dealer, listed at 175 High Street, Waltham.</dd>
 <dt>Platforms</dt><dd>Audi, Volkswagen, and Porsche.</dd>
 <dt>Software</dt><dd>ECU and TCU calibrations, matched to the car's modifications.</dd>
 <dt>Hardware</dt><dd>Exhausts, intakes, intercoolers, turbo upgrades, wheels, and suspension.</dd>
 <dt>Maintenance</dt><dd><a href="services.html#dsg-service">DSG service</a> every 40,000 miles and <a href="services.html#carbon-cleaning">carbon cleaning</a> keep a tuned car healthy.</dd>
 </dl>
+<div style="margin-top:28px">{shot("exhaust-fabrication", "Stainless exhaust pipe bends and a welding helmet laid out on a workbench")}</div></div>
+</div></section>
+<section class="band band--floor" aria-labelledby="h-proof"><div class="wrap split split--even">
+<div class="stack"><h2 id="h-proof">The shop's own race car</h2>
+<p class="lede">RayTeam Motorsport's Audi Group B tribute car is worked on in these same bays between hill climbs.</p>
+<p><a href="motorsport.html">RayTeam Motorsport</a></p></div>
+{shot("race-car-lift", "RayTeam Motorsport's number 10 Audi Group B tribute car raised on a lift in the Waltham shop")}
 </div></section>
 {cta("Talk to the shop about your build.")}
 """
@@ -484,9 +544,17 @@ def motorsport():
             "Pikes Peak International Hill Climb in an Audi Group B tribute car.")
     crumbs = [(None, "Motorsport")]
     src = "".join(f'<li><a href="{u}">{esc(t)}</a></li>' for t, u in c.SOURCES_MOTORSPORT)
-    body = f"""<section class="page-hero page-hero--black on-black"><div class="wrap">{crumbs_html(crumbs)}
-<h1>RayTeam Motorsport</h1>
-<p class="lede">The race team of RayTeam Automotive. Its first race was the 2024 Pikes Peak International Hill Climb, in an Audi Group B tribute car built and driven by Laszlo Keskeny.</p>
+    feat = c.VIDEOS[0]
+    more = "".join(f"<li>{video(*v)}</li>" for v in c.VIDEOS[1:])
+    gallery = "".join(f"<li>{shot(n, a)}</li>" for n, a in [
+        ("race-bend", "The number 10 Audi rounding a bend on a wooded hill climb road"),
+        ("race-wing", "Rear of the Audi tribute car in the shop, showing its large rear wing"),
+        ("race-rear", "The car heading away up a narrow road through the trees"),
+        ("race-trailer", "The car strapped down inside its transport trailer")])
+    body = f"""<section class="page-hero page-hero--black page-hero--media on-black"><div class="wrap">{crumbs_html(crumbs)}
+<div><h1>RayTeam Motorsport</h1>
+<p class="lede">The race team of RayTeam Automotive. Its first race was the 2024 Pikes Peak International Hill Climb, in an Audi Group B tribute car built and driven by Laszlo Keskeny.</p></div>
+{shot("race-front", "The number 10 Audi Group B tribute car at speed on a wooded hill climb road", eager=True)}
 </div></section>
 <section class="band on-black" style="padding-top:0" aria-labelledby="h-time"><div class="wrap split split--even">
 <div class="stack"><h2 id="h-time" class="skip">Pikes Peak 2024 result</h2>
@@ -495,6 +563,12 @@ def motorsport():
 <p class="small">The course climbs 4,725 feet at an average grade of about 7 percent.</p></div>
 <figure>{climb_svg()}</figure>
 </div></section>
+<section class="band on-black" style="padding-top:0" aria-labelledby="h-watch"><div class="wrap feature">
+{video(*feat)}
+<div class="stack"><h2 id="h-watch">Ride along</h2>
+<p class="lede">A point-of-view film of the complete race-day run up Pikes Peak, published on the team's own channel.</p>
+<p><a class="btn btn--ghost" href="{c.YOUTUBE}">RayTeam on YouTube</a></p></div>
+</div></section>
 <section class="band" aria-labelledby="h-record"><div class="wrap split">
 <div class="stack"><h2 id="h-record">Race record</h2>
 <p>Two seasons in, the team has gone from one car to two.</p></div>
@@ -502,24 +576,32 @@ def motorsport():
 <li><time datetime="2024-06-23">June 23, 2024</time><div><h3>102nd Pikes Peak International Hill Climb, Colorado</h3>
 <p>The team's first race. Laszlo Keskeny, a Pikes Peak rookie, drove a 1986 Audi 4000 built as a Group B Audi Sport Quattro tribute to the summit in 12:57.142, 14th in the Pikes Peak Open division.</p></div></li>
 <li><time datetime="2024-09-07">September 7, 2024</time><div><h3>Mt. Ascutney Hillclimb, Vermont</h3>
-<p>Second event on the team's 2024 calendar.</p></div></li>
+<p>Episode 1 of the team's hill climb campaign series.</p></div></li>
 <li><time datetime="2024-10-20">October 20, 2024</time><div><h3>Okemo Hillclimb, Vermont</h3>
-<p>Third event on the team's 2024 calendar.</p></div></li>
+<p>Episode 2 of the campaign series.</p></div></li>
 <li><time datetime="2025-06">June 2025</time><div><h3>103rd Pikes Peak International Hill Climb, Colorado</h3>
 <p>The second campaign grew from one Group B tribute car to two. Rookie Alex Kim entered an Audi S1 E2 tribute with the team, as RACER reported ahead of the race.</p></div></li>
 </ol>
 </div></section>
-<section class="band band--floor" aria-labelledby="h-cars"><div class="wrap split">
-<div class="stack"><h2 id="h-cars">The cars</h2></div>
-<div class="prose">
-<h3 style="margin-top:0">1986 Audi S1 E2</h3>
-<p>The S1 E2 was Audi's Group B rally car: a turbocharged five-cylinder engine and all-wheel drive in a short, wide body with a large rear wing. The team's car is a tribute to it, and it is the shape that climbed Pikes Peak in 2024.</p>
+<section class="band band--floor" aria-labelledby="h-videos"><div class="wrap">
+<div class="head"><h2 id="h-videos">Films from the campaign</h2>
+<p class="lede">Each video loads from YouTube when you press play. The channel also covers the Burke Mountain Hillclimb, ice racing, and the 2026 Climb to the Clouds.</p></div>
+<ul class="videos">{more}</ul>
+</div></section>
+<section class="band" aria-labelledby="h-cars"><div class="wrap">
+<div class="head"><h2 id="h-cars">The cars</h2></div>
+<div class="split split--even">
+<div class="stack">{shot("race-car-lift", "The number 10 Audi Group B tribute car raised on a lift in the Waltham shop")}
+<h3>1986 Audi S1 E2</h3>
+<p>The S1 E2 was Audi's Group B rally car: a turbocharged five-cylinder engine and all-wheel drive in a short, wide body with a large rear wing. The team's car is a tribute to it, and it is the shape that climbed Pikes Peak in 2024.</p></div>
+<div class="stack"><div style="max-width:420px">{shot("ur-quattro", "A white and blue Audi UR Quattro rally car parked in the shop")}</div>
 <h3>1987 Audi UR Quattro</h3>
 <p>The road car that started it. The original Quattro put all-wheel drive into a performance coupe and changed rallying.</p>
-<p>Race footage is on the team's <a href="https://www.youtube.com/@Rayteammotorsport">YouTube channel</a>, and sponsorship details are at <a href="https://rayteammotorsport.com/">rayteammotorsport.com</a>.</p>
+<p>Sponsorship details are at <a href="https://rayteammotorsport.com/">rayteammotorsport.com</a>.</p></div>
 </div>
+<ul class="gallery" style="margin-top:clamp(32px,4vw,56px)">{gallery}</ul>
 </div></section>
-<section class="band" aria-labelledby="h-src"><div class="wrap split">
+<section class="band band--floor" aria-labelledby="h-src"><div class="wrap split">
 <div class="stack"><h2 id="h-src">Sources</h2></div>
 <ul class="index" style="grid-template-columns:1fr">{src}</ul>
 </div></section>
@@ -533,10 +615,9 @@ def about():
     desc = ("RayTeam Automotive has repaired German and European cars at 175 High Street, Waltham, since 2009: "
             "factory diagnostics, OEM parts, a 24-month repair warranty.")
     crumbs = [(None, "About")]
-    body = f"""<section class="page-hero"><div class="wrap">{crumbs_html(crumbs)}
-<h1>An independent German auto shop in Waltham since 2009</h1>
-<p class="lede">RayTeam Automotive is led by Frank Ocsai and works from its own service building at 175 High Street, six miles from downtown Boston.</p>
-</div></section>
+    body = media_hero(crumbs, "An independent German auto shop in Waltham since 2009",
+                      "RayTeam Automotive is led by Frank Ocsai and works from its own service building at 175 High Street, six miles from downtown Boston.",
+                      ("shop-aisle-wide", "Looking down RayTeam's shop, with lifts on both sides and cars in the bays"), actions=False) + f"""
 <section class="band"><div class="wrap split split--prose">
 <div class="prose">
 <h2>How the work gets done</h2>
@@ -550,7 +631,8 @@ def about():
 <h2>Racing</h2>
 <p>In 2024 the shop formed RayTeam Motorsport and entered its first race, the Pikes Peak International Hill Climb. Read the <a href="motorsport.html">race record</a>.</p>
 </div>
-<dl class="facts">
+<div>{shot("team", "Four RayTeam technicians in navy work jackets, laughing together in the shop")}
+<dl class="facts" style="margin-top:28px">
 <dt>Founded</dt><dd>2009</dd>
 <dt>Address</dt><dd>{c.STREET}, {c.CITY_LINE}</dd>
 <dt>Workshop</dt><dd>More than a dozen service bays in the shop's own service building.</dd>
@@ -558,7 +640,15 @@ def about():
 <dt>Equipment</dt><dd>Dealer-level diagnostic tools and factory-specific scanners.</dd>
 <dt>Makes</dt><dd>Audi, BMW, Mercedes-Benz, Porsche, Volkswagen, MINI, Land Rover, Jaguar, and Volvo. <a href="makes.html">See each make</a>.</dd>
 <dt>Extended warranties</dt><dd>Works with every aftermarket warranty company.</dd>
-</dl>
+</dl></div>
+</div></section>
+<section class="band band--floor" aria-labelledby="h-inside"><div class="wrap">
+<div class="head"><h2 id="h-inside">Inside the shop</h2></div>
+<ul class="photos3">
+<li>{shot("floor-logo", "The RayTeam logo painted on the polished shop floor")}</li>
+<li>{shot("shop-bays", "Cars raised on two-level lifts in the service bays")}</li>
+<li>{shot("shop-floor", "Sports cars parked on the polished shop floor between rows of red lifts")}</li>
+</ul>
 </div></section>
 {cta()}
 """
@@ -578,7 +668,8 @@ def faq():
 </div></section>
 <section class="band"><div class="wrap split">
 <div class="stack"><h2>Answers</h2>
-<p>Still unsure? Call <a href="{c.TEL_HREF}">{c.TEL_HUMAN}</a> and describe what the car is doing.</p></div>
+<p>Still unsure? Call <a href="{c.TEL_HREF}">{c.TEL_HUMAN}</a> and describe what the car is doing.</p>
+{shot("shop-bays", "Cars raised on two-level lifts in RayTeam's service bays")}</div>
 <div class="faq">{items}</div>
 </div></section>
 {cta()}
@@ -592,10 +683,11 @@ def contact():
             "Open Monday to Friday 8 to 5 and Saturday 9 to 1.")
     crumbs = [(None, "Contact")]
     social = "".join(f'<li><a href="{u}">{n}</a></li>' for n, u in c.SOCIAL)
-    body = f"""<section class="page-hero"><div class="wrap">{crumbs_html(crumbs)}
-<h1>Contact RayTeam Automotive</h1>
+    body = f"""<section class="page-hero page-hero--media"><div class="wrap">{crumbs_html(crumbs)}
+<div><h1>Contact RayTeam Automotive</h1>
 <p class="lede">Call, book online, or come by 175 High Street in Waltham. Describe what the car is doing and the shop will tell you what it takes to fix it.</p>
-<div class="actions" style="margin-top:28px"><a class="btn" href="{c.TEL_HREF}">Call {c.TEL_HUMAN}</a><a class="btn btn--line" href="{c.BOOK}">Book service online</a><a class="btn btn--line" href="{c.MAPS}">Get directions</a></div>
+<div class="actions" style="margin-top:28px"><a class="btn" href="{c.TEL_HREF}">Call {c.TEL_HUMAN}</a><a class="btn btn--line" href="{c.BOOK}">Book service online</a><a class="btn btn--line" href="{c.MAPS}">Get directions</a></div></div>
+{shot("shop-sign-audi", "A grey Audi parked outside the shop, with the RayTeam Automotive sign behind it", "The sign out front.", eager=True)}
 </div></section>
 <section class="band"><div class="wrap split split--even">
 <div>{hours_sign()}</div>

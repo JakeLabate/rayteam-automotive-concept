@@ -302,3 +302,40 @@ SOURCES_MOTORSPORT = [
     ("RACER: Kim doubles vintage Quattro fun in Pikes Peak debut", "https://racer.com/2025/06/06/kim-doubles-vintage-quattro-fun-in-pikes-peak-debut"),
     ("RayTeam Motorsport", "https://rayteammotorsport.com/"),
 ]
+
+# ------------------------------------------------------------------ media
+# The shop's own photographs, pulled from its media library and vendored into img/photos.
+# Stock, AI-generated, manufacturer, sponsor, and third-party Instagram images were left out.
+MAKE_PHOTOS = {
+    "audi": [("audi-rs3-front", "Front of a black Audi RS 3 with a quattro badge in its grille"),
+             ("audi-liqui-moly", "A grey Audi RS with its hood open beside shelves of LIQUI MOLY oil")],
+    "bmw": [("bmw-bay", "A black BMW sedan in a service bay with a white sedan on the lift behind it")],
+    "mercedes-benz": [("mercedes-sl", "A classic Mercedes-Benz SL parked beside the RayTeam logo painted on the shop floor")],
+    "porsche": [("porsche-gt3rs", "A green Porsche 911 GT3 RS on a lift with a technician working underneath"),
+                ("porsche-gt2rs", "Rear of a yellow Porsche 911 GT2 RS raised on a lift")],
+    "volkswagen": [("vw-lift", "A Volkswagen raised on a lift mid-repair, with its wheels stacked on the floor")],
+    "mini": [("shop-bays", "Cars raised on two-level lifts in RayTeam's service bays")],
+    "land-rover": [("land-rover-alignment", "A black Land Rover Discovery Sport on an alignment rack with sensors on its wheels"),
+                   ("range-rover-wheel-off", "A white Range Rover on a lift with a front wheel and fender liner removed")],
+    "jaguar": [("jaguar-etype", "A dark green Jaguar E-Type roadster on the shop floor, with a red sports car on the lift behind it")],
+    "volvo": [("shop-aisle-wide", "Looking down RayTeam's shop, with lifts on both sides and cars in the bays")],
+}
+
+# Videos on the shop's own YouTube channel. Titles are the channel's own.
+VIDEOS = [
+    ("7SrgvYEbTWo", "POV Racing an Audi S1 E2 up Pikes Peak // Race Day Complete Run", "race-speed-wide",
+     "The number 10 Audi at speed on a hill climb course with its lights on"),
+    ("8AyYSXpB9d4", "FOR THE LOVE OF GROUP B // The Audi S1 returns to Pikes Peak", "race-front-wide",
+     "Front view of the number 10 Audi on a wooded hill climb road"),
+    ("hCUqlmdtqOY", "The Audi S1 E2 Hillclimb Campaign: Mt. Ascutney // Ep.1", "ascutney-dusk-wide",
+     "The car climbing a narrow road at dusk"),
+    ("TlniCysixso", "Group B Rally at Okemo Mountain Hillclimb // AUDI S1 Campaign Ep. 2", "okemo-wide",
+     "The number 10 car parked among autumn trees"),
+    ("W9V_nCBOPy4", "144 Hours to Rebuild an Audi S1 E2 - Okemo Hillclimb", "race-car-lift-wide",
+     "The Audi tribute car raised on a lift in the Waltham shop"),
+    ("vswKGdNbkDg", "New Driver, Mods, Dyno, & Testing - The Road To Pikes Peak", "race-underside-wide",
+     "A technician working under the raised race car"),
+    ("RAI3NqXgSys", "Our Group A Audi Quattro Rally Car Goes Ice Racing", "ur-quattro-wide",
+     "A white and blue Audi Quattro rally car parked in the shop"),
+]
+YOUTUBE = "https://www.youtube.com/@Rayteammotorsport"

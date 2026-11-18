@@ -23,6 +23,13 @@ python3 _src/build.py
 Share cards in `img/og/` are rendered from each page's title and description. Re-render them
 after any change to a title, description, palette, or font.
 
+## Photos and video
+
+`img/photos/` holds the shop's own photographs, taken from the media libraries of
+rayteamgermanauto.com and rayteammotorsport.com, then cropped and compressed by `_src/photos.py`.
+Stock, AI-generated, manufacturer, sponsor, and third-party images were left out. Videos are
+click-to-load embeds from the shop's own YouTube channel. The originals are not in this repo.
+
 ## Sources
 
 Business facts come from RayTeam's own published pages. Race results come from the Pikes Peak

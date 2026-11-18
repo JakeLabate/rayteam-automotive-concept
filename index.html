@@ -177,6 +177,30 @@ p{max-width:68ch}
 .cards2 li{padding:18px 0;border-top:1px solid var(--black)}
 .cards2 a{font-weight:700;color:var(--black)}
 
+/* photography: the shop's own pictures, framed like the sign panels */
+.shot img{width:100%;height:auto;border:var(--rule) solid var(--black);border-radius:var(--radius);background:var(--floor)}
+.shot figcaption{margin-top:10px}
+.on-black .shot img{border-color:var(--paper)}
+.strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--rule);background:var(--black);border-block:var(--rule) solid var(--black)}
+.strip img{width:100%;height:100%;aspect-ratio:3/4;object-fit:cover}
+.photos3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,2vw,24px)}
+.photos3 img{aspect-ratio:4/3;object-fit:cover}
+.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,2vw,24px)}
+.gallery img{aspect-ratio:1;object-fit:cover}
+.page-hero--media .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr);gap:clamp(28px,5vw,72px);align-items:center}
+.page-hero--media .crumbs{grid-column:1/-1;margin-bottom:0}
+.video__link{display:block;position:relative;aspect-ratio:16/9;border:var(--rule) solid var(--black);border-radius:var(--radius);overflow:hidden;background:var(--black)}
+.video__link img{width:100%;height:100%;object-fit:cover}
+.video__play{position:absolute;left:50%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;background:var(--gold);border:var(--rule) solid var(--black)}
+.video__play::after{content:"";position:absolute;left:27px;top:19px;border-style:solid;border-width:16px 0 16px 24px;border-color:transparent transparent transparent var(--black)}
+.video__link:hover .video__play,.video__link:focus-visible .video__play{background:var(--paper)}
+.video iframe{display:block;width:100%;aspect-ratio:16/9;border:var(--rule) solid var(--black);border-radius:var(--radius);background:var(--black)}
+.video figcaption{margin-top:12px;font-weight:700;color:var(--black)}
+.on-black .video figcaption{color:var(--paper)}
+.on-black .video__link,.on-black .video iframe{border-color:var(--paper)}
+.videos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,36px)}
+.feature{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:center}
+
 /* black bands */
 .on-black{background:var(--black);color:var(--paper)}
 .on-black h2,.on-black h3,.on-black .display{color:var(--paper)}
@@ -248,7 +272,12 @@ p{max-width:68ch}
   .nav a{padding:10px 8px}
 }
 @media (max-width:900px){
-  .hero .wrap,.finder,.split,.split--even,.split--prose,.svc,.foot__grid{grid-template-columns:1fr}
+  .hero .wrap,.finder,.split,.split--even,.split--prose,.svc,.foot__grid,.page-hero--media .wrap,.feature{grid-template-columns:1fr}
+  .videos{grid-template-columns:1fr}
+  .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .photos3{grid-template-columns:1fr}
+  .strip{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:62%;overflow-x:auto;scroll-snap-type:x mandatory}
+  .strip li{scroll-snap-align:start}
   .index,.cards2{grid-template-columns:1fr}
   .facts{grid-template-columns:1fr}
   .facts dd{border-top:0;padding-top:0}
@@ -410,6 +439,7 @@ p{max-width:68ch}
 <address><b>Waltham</b>175 High Street<br>Waltham, MA 02453<br><a href="https://www.google.com/maps/search/?api=1&query=RayTeam+Automotive%2C+175+High+St%2C+Waltham%2C+MA+02453">Get directions</a></address>
 </aside>
 </div></section>
+<ul class="strip" aria-label="Inside the RayTeam shop"><li><img src="img/photos/shop-mercedes-sl.webp" alt="A classic Mercedes-Benz SL parked beside the RayTeam logo painted on the shop floor" width="412" height="550"></li><li><img src="img/photos/shop-aisle.webp" alt="Looking down the shop: lifts on both sides, a red and black checkered floor, and cars in the bays" width="375" height="500"></li><li><img src="img/photos/shop-porsche-gt3rs.webp" alt="A green Porsche 911 GT3 RS on a lift with a technician working underneath" width="411" height="548"></li><li><img src="img/photos/shop-audi-rs3-tall.webp" alt="Rear quarter of a grey Audi RS 3 in the shop with its door open" width="374" height="499"></li><li><img src="img/photos/shop-jaguar-etype.webp" alt="A dark green Jaguar E-Type roadster on the shop floor" width="375" height="500"></li></ul>
 
 <section class="band" aria-labelledby="h-makes"><div class="wrap">
 <div class="head"><h2 id="h-makes">Makes we service</h2>
@@ -430,12 +460,18 @@ p{max-width:68ch}
 <div class="head"><h2 id="h-services">Services</h2>
 <p class="lede">Routine maintenance, diagnosis, and major repairs, all done in the shop's own service building.</p></div>
 <ul class="index"><li><a href="services.html#check-engine-light">Check engine light diagnosis</a><p>A factory-level scan and a test plan before any part is replaced.</p></li><li><a href="services.html#diagnostic-inspection">Diagnostic inspection</a><p>Fault memory, software and module checks, live data, and component testing.</p></li><li><a href="services.html#oil-change">Oil change service</a><p>LIQUI MOLY full-synthetic German oil on every car.</p></li><li><a href="services.html#oil-leak-repair">Oil leak repair</a><p>Valve covers, oil filter housings, oil coolers, and rear main seals.</p></li><li><a href="services.html#scheduled-maintenance">Scheduled maintenance</a><p>Oil, fluids, inspections, and brake maintenance on the manufacturer&#x27;s schedule.</p></li><li><a href="services.html#brakes-clutch">Brake and clutch service</a><p>OEM and OE-specification German parts, with brake fluid tested for moisture.</p></li><li><a href="services.html#suspension">Suspension repair</a><p>Struts, bushings, control arms, and air suspension.</p></li><li><a href="services.html#transmission">Transmission repair</a><p>Fluid maintenance through full repairs, including DSG dual-clutch gearboxes.</p></li><li><a href="services.html#engine-repair">Engine repair</a><p>Timing chains, gasket leaks, cooling faults, and carbon cleaning.</p></li><li><a href="services.html#electrical">Electrical repair</a><p>Battery, wiring, sensor, and control module faults.</p></li><li><a href="services.html#ac-repair">A/C repair</a><p>Leaks, compressor faults, and weak cooling.</p></li><li><a href="services.html#coding">Programming and coding</a><p>Factory equipment for Audi, BMW, Mercedes-Benz, and Volkswagen.</p></li><li><a href="services.html#carbon-cleaning">Carbon cleaning</a><p>Walnut blasting for intake valves on direct-injection engines.</p></li><li><a href="services.html#dsg-service">DSG service</a><p>Fluid, filters, and o-rings for Volkswagen and Audi dual-clutch gearboxes.</p></li><li><a href="services.html#fluid-services">Fluid services</a><p>Transmission, brake, power steering, and DSG fluid.</p></li><li><a href="services.html#water-damage">Water damage repair</a><p>Tracing and repairing damage from water inside the car.</p></li><li><a href="services.html#warranty-claims">Aftermarket warranty work</a><p>The shop works with every aftermarket warranty company.</p></li></ul>
+<ul class="photos3" style="margin-top:clamp(32px,4vw,56px)">
+<li><figure class="shot"><img src="img/photos/brake-caliper.webp" alt="A red brake caliper and drilled rotor on a car raised on a lift with its wheel off" width="700" height="560" loading="lazy" decoding="async"></figure></li>
+<li><figure class="shot"><img src="img/photos/land-rover-alignment.webp" alt="A black Land Rover Discovery Sport on an alignment rack with sensors on its wheels" width="933" height="700" loading="lazy" decoding="async"></figure></li>
+<li><figure class="shot"><img src="img/photos/range-rover-engine-bay.webp" alt="The engine bay of a Range Rover Sport with its hood open" width="800" height="600" loading="lazy" decoding="async"></figure></li>
+</ul>
 </div></section>
 
 <section class="band band--floor" aria-labelledby="h-dealer"><div class="wrap split">
 <div class="stack"><h2 id="h-dealer">Dealer-level work without the dealership</h2>
 <p>What an independent shop needs to match a dealer is equipment, parts, and a warranty that says it stands behind both. Here is what RayTeam puts on the record.</p>
-<p><a href="about.html">About the shop</a></p></div>
+<p><a href="about.html">About the shop</a></p>
+<figure class="shot"><img src="img/photos/audi-liqui-moly.webp" alt="A grey Audi RS with its hood open beside shelves of LIQUI MOLY oil" width="500" height="500" loading="lazy" decoding="async"></figure></div>
 <dl class="facts">
 <dt>Diagnostics</dt><dd>Factory diagnostic and repair equipment for Audi, BMW, Mercedes-Benz, and Volkswagen, built up over more than 15 years, including module coding.</dd>
 <dt>Parts</dt><dd>OEM and OE-specification parts.</dd>
@@ -449,16 +485,8 @@ p{max-width:68ch}
 <section class="band on-black" aria-labelledby="h-race"><div class="wrap split split--even">
 <div class="stack"><h2 id="h-race">The shop that raced Pikes Peak</h2>
 <p class="lede">In June 2024 RayTeam Motorsport made its racing debut at the 102nd Pikes Peak International Hill Climb. Laszlo Keskeny drove the team's number 10 Audi Group B tribute car to the summit in 12:57.142.</p>
-<p><a class="btn btn--gold" href="motorsport.html">RayTeam Motorsport</a></p></div>
-<figure><svg class="climb" viewBox="0 0 640 372" role="img" aria-label="Diagram of the Pikes Peak course: 156 turns over 12.42 miles, climbing from 9,390 feet at the start line to 14,115 feet at the summit.">
-<path class="ticks" d="M25.1 280.5L38.6 318.2M28.8 279.2L42.3 316.8M32.5 277.8L46.0 315.5M36.3 276.5L49.8 314.2M40.0 275.2L53.5 312.8M43.7 273.8L57.2 311.5M47.4 272.5L60.9 310.2M51.1 271.2L64.6 308.8M54.9 269.8L68.4 307.5M58.6 268.5L72.1 306.2M62.3 267.2L75.8 304.8M66.0 265.8L79.5 303.5M69.7 264.5L83.2 302.2M73.4 263.2L86.9 300.8M77.2 261.8L90.7 299.5M80.9 260.5L94.4 298.2M84.6 259.2L98.1 296.8M88.3 257.8L101.8 295.5M92.0 256.5L105.5 294.2M95.7 255.2L109.3 292.8M99.5 253.8L113.0 291.5M103.2 252.5L116.7 290.2M106.9 251.2L120.4 288.8M110.6 249.8L124.1 287.5M114.3 248.5L127.8 286.2M118.1 247.2L131.6 284.8M121.8 245.8L135.3 283.5M125.5 244.5L139.0 282.2M129.2 243.2L142.7 280.8M132.9 241.8L146.4 279.5M136.6 240.5L150.1 278.2M140.4 239.2L153.9 276.8M144.1 237.8L157.6 275.5M147.8 236.5L161.3 274.2M151.5 235.2L165.0 272.8M155.2 233.8L168.7 271.5M159.0 232.5L172.5 270.2M162.7 231.2L176.2 268.8M166.4 229.8L179.9 267.5M170.1 228.5L183.6 266.2M173.8 227.2L187.3 264.8M177.5 225.8L191.0 263.5M181.3 224.5L194.8 262.2M185.0 223.2L198.5 260.8M188.7 221.8L202.2 259.5M192.4 220.5L205.9 258.2M196.1 219.2L209.6 256.8M199.9 217.8L213.4 255.5M203.6 216.5L217.1 254.2M207.3 215.2L220.8 252.8M211.0 213.8L224.5 251.5M214.7 212.5L228.2 250.2M218.4 211.2L231.9 248.8M222.2 209.8L235.7 247.5M225.9 208.5L239.4 246.2M229.6 207.2L243.1 244.8M233.3 205.8L246.8 243.5M237.0 204.5L250.5 242.2M240.7 203.2L254.3 240.8M244.5 201.8L258.0 239.5M248.2 200.5L261.7 238.2M251.9 199.2L265.4 236.8M255.6 197.8L269.1 235.5M259.3 196.5L272.8 234.2M263.1 195.2L276.6 232.8M266.8 193.8L280.3 231.5M270.5 192.5L284.0 230.2M274.2 191.2L287.7 228.8M277.9 189.8L291.4 227.5M281.6 188.5L295.1 226.2M285.4 187.2L298.9 224.8M289.1 185.8L302.6 223.5M292.8 184.5L306.3 222.2M296.5 183.2L310.0 220.8M300.2 181.8L313.7 219.5M304.0 180.5L317.5 218.2M307.7 179.2L321.2 216.8M311.4 177.8L324.9 215.5M315.1 176.5L328.6 214.2M318.8 175.2L332.3 212.8M322.5 173.8L336.0 211.5M326.3 172.5L339.8 210.2M330.0 171.2L343.5 208.8M333.7 169.8L347.2 207.5M337.4 168.5L350.9 206.2M341.1 167.2L354.6 204.8M344.9 165.8L358.4 203.5M348.6 164.5L362.1 202.2M352.3 163.2L365.8 200.8M356.0 161.8L369.5 199.5M359.7 160.5L373.2 198.2M363.4 159.2L376.9 196.8M367.2 157.8L380.7 195.5M370.9 156.5L384.4 194.2M374.6 155.2L388.1 192.8M378.3 153.8L391.8 191.5M382.0 152.5L395.5 190.2M385.7 151.2L399.3 188.8M389.5 149.8L403.0 187.5M393.2 148.5L406.7 186.2M396.9 147.2L410.4 184.8M400.6 145.8L414.1 183.5M404.3 144.5L417.8 182.2M408.1 143.2L421.6 180.8M411.8 141.8L425.3 179.5M415.5 140.5L429.0 178.2M419.2 139.2L432.7 176.8M422.9 137.8L436.4 175.5M426.6 136.5L440.1 174.2M430.4 135.2L443.9 172.8M434.1 133.8L447.6 171.5M437.8 132.5L451.3 170.2M441.5 131.2L455.0 168.8M445.2 129.8L458.7 167.5M449.0 128.5L462.5 166.2M452.7 127.2L466.2 164.8M456.4 125.8L469.9 163.5M460.1 124.5L473.6 162.2M463.8 123.2L477.3 160.8M467.5 121.8L481.0 159.5M471.3 120.5L484.8 158.2M475.0 119.2L488.5 156.8M478.7 117.8L492.2 155.5M482.4 116.5L495.9 154.2M486.1 115.2L499.6 152.8M489.9 113.8L503.4 151.5M493.6 112.5L507.1 150.2M497.3 111.2L510.8 148.8M501.0 109.8L514.5 147.5M504.7 108.5L518.2 146.2M508.4 107.2L521.9 144.8M512.2 105.8L525.7 143.5M515.9 104.5L529.4 142.2M519.6 103.2L533.1 140.8M523.3 101.8L536.8 139.5M527.0 100.5L540.5 138.2M530.7 99.2L544.3 136.8M534.5 97.8L548.0 135.5M538.2 96.5L551.7 134.2M541.9 95.2L555.4 132.8M545.6 93.8L559.1 131.5M549.3 92.5L562.8 130.2M553.1 91.2L566.6 128.8M556.8 89.8L570.3 127.5M560.5 88.5L574.0 126.2M564.2 87.2L577.7 124.8M567.9 85.8L581.4 123.5M571.6 84.5L585.1 122.2M575.4 83.2L588.9 120.8M579.1 81.8L592.6 119.5M582.8 80.5L596.3 118.2M586.5 79.2L600.0 116.8M590.2 77.8L603.7 115.5M594.0 76.5L607.5 114.2M597.7 75.2L611.2 112.8M601.4 73.8L614.9 111.5"/>
-<path class="road" d="M30 300L610 92"/>
-<circle class="dot" cx="30" cy="300" r="11"/><circle class="dot" cx="610" cy="92" r="11"/>
-<text x="14" y="356">Start line, 9,390 ft</text>
-<text x="626" y="48" text-anchor="end">Summit, 14,115 ft</text>
-<text class="big" x="626" y="268" text-anchor="end">156 turns</text>
-<text x="626" y="304" text-anchor="end">in 12.42 miles, one tick each</text>
-</svg></figure>
+<p><a class="btn btn--gold" href="motorsport.html">Race record and videos</a></p></div>
+<figure class="shot"><img src="img/photos/race-front.webp" alt="The number 10 Audi Group B tribute car at speed on a wooded hill climb road" width="900" height="900" loading="lazy" decoding="async"></figure>
 </div></section>
 
 <section class="band" aria-labelledby="h-journal"><div class="wrap split">
@@ -476,7 +504,8 @@ p{max-width:68ch}
 <section class="band" aria-labelledby="h-visit"><div class="wrap split split--even">
 <div class="stack"><h2 id="h-visit">Six miles from downtown Boston</h2>
 <p class="lede">The shop is at 175 High Street in Waltham and draws drivers from Newton, Watertown, Cambridge, Brookline, and Boston.</p>
-<div class="actions"><a class="btn" href="https://www.google.com/maps/search/?api=1&query=RayTeam+Automotive%2C+175+High+St%2C+Waltham%2C+MA+02453">Get directions</a><a class="btn btn--line" href="contact.html">Hours and contact</a></div></div>
+<div class="actions"><a class="btn" href="https://www.google.com/maps/search/?api=1&query=RayTeam+Automotive%2C+175+High+St%2C+Waltham%2C+MA+02453">Get directions</a><a class="btn btn--line" href="contact.html">Hours and contact</a></div>
+<div style="max-width:420px;margin-top:28px"><figure class="shot"><img src="img/photos/shop-sign-audi.webp" alt="A grey Audi parked outside the shop, with the RayTeam Automotive sign behind it" width="500" height="500" loading="lazy" decoding="async"><figcaption class="small">The sign out front.</figcaption></figure></div></div>
 <div><div class="sign sign--gold"><div><table class="dist"><caption class="skip">Distance to RayTeam Automotive from nearby towns</caption><tr><th scope="row">Watertown</th><td>3.4 mi</td></tr><tr><th scope="row">Newton</th><td>3.9 mi</td></tr><tr><th scope="row">Boston</th><td>6 mi</td></tr><tr><th scope="row">Cambridge</th><td>8.3 mi</td></tr></table></div></div>
 <p class="small" style="margin-top:14px">Driving distances to 175 High Street as RayTeam publishes them. Boston is measured from downtown. Brookline drivers make the trip too.</p></div>
 </div></section>
@@ -528,6 +557,9 @@ if(mb)mb.addEventListener('click',function(){var on=nav.classList.toggle('is-ope
 var cl=d.querySelectorAll('.climb');
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target)}})},{threshold:.4});
 cl.forEach(function(x){io.observe(x)})}else{cl.forEach(function(x){x.classList.add('is-in')})}
+d.querySelectorAll('[data-yt]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();
+var f=d.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+a.getAttribute('data-yt')+'?autoplay=1&rel=0';
+f.title=a.getAttribute('data-title');f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;a.parentNode.replaceChild(f,a)})});
 var m=d.querySelector('[data-map]');
 if(m)m.querySelector('button').addEventListener('click',function(){m.classList.add('is-live');
 m.innerHTML='<iframe title="Map showing RayTeam Automotive at 175 High Street, Waltham" loading="lazy" src="'+m.getAttribute('data-map')+'"></iframe>'});

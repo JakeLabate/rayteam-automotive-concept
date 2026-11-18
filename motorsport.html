@@ -177,6 +177,30 @@ p{max-width:68ch}
 .cards2 li{padding:18px 0;border-top:1px solid var(--black)}
 .cards2 a{font-weight:700;color:var(--black)}
 
+/* photography: the shop's own pictures, framed like the sign panels */
+.shot img{width:100%;height:auto;border:var(--rule) solid var(--black);border-radius:var(--radius);background:var(--floor)}
+.shot figcaption{margin-top:10px}
+.on-black .shot img{border-color:var(--paper)}
+.strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--rule);background:var(--black);border-block:var(--rule) solid var(--black)}
+.strip img{width:100%;height:100%;aspect-ratio:3/4;object-fit:cover}
+.photos3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,2vw,24px)}
+.photos3 img{aspect-ratio:4/3;object-fit:cover}
+.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,2vw,24px)}
+.gallery img{aspect-ratio:1;object-fit:cover}
+.page-hero--media .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr);gap:clamp(28px,5vw,72px);align-items:center}
+.page-hero--media .crumbs{grid-column:1/-1;margin-bottom:0}
+.video__link{display:block;position:relative;aspect-ratio:16/9;border:var(--rule) solid var(--black);border-radius:var(--radius);overflow:hidden;background:var(--black)}
+.video__link img{width:100%;height:100%;object-fit:cover}
+.video__play{position:absolute;left:50%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;background:var(--gold);border:var(--rule) solid var(--black)}
+.video__play::after{content:"";position:absolute;left:27px;top:19px;border-style:solid;border-width:16px 0 16px 24px;border-color:transparent transparent transparent var(--black)}
+.video__link:hover .video__play,.video__link:focus-visible .video__play{background:var(--paper)}
+.video iframe{display:block;width:100%;aspect-ratio:16/9;border:var(--rule) solid var(--black);border-radius:var(--radius);background:var(--black)}
+.video figcaption{margin-top:12px;font-weight:700;color:var(--black)}
+.on-black .video figcaption{color:var(--paper)}
+.on-black .video__link,.on-black .video iframe{border-color:var(--paper)}
+.videos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,36px)}
+.feature{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:center}
+
 /* black bands */
 .on-black{background:var(--black);color:var(--paper)}
 .on-black h2,.on-black h3,.on-black .display{color:var(--paper)}
@@ -248,7 +272,12 @@ p{max-width:68ch}
   .nav a{padding:10px 8px}
 }
 @media (max-width:900px){
-  .hero .wrap,.finder,.split,.split--even,.split--prose,.svc,.foot__grid{grid-template-columns:1fr}
+  .hero .wrap,.finder,.split,.split--even,.split--prose,.svc,.foot__grid,.page-hero--media .wrap,.feature{grid-template-columns:1fr}
+  .videos{grid-template-columns:1fr}
+  .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .photos3{grid-template-columns:1fr}
+  .strip{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:62%;overflow-x:auto;scroll-snap-type:x mandatory}
+  .strip li{scroll-snap-align:start}
   .index,.cards2{grid-template-columns:1fr}
   .facts{grid-template-columns:1fr}
   .facts dd{border-top:0;padding-top:0}
@@ -349,9 +378,10 @@ p{max-width:68ch}
 <div class="flag" aria-hidden="true"></div>
 </header>
 <main id="main">
-<section class="page-hero page-hero--black on-black"><div class="wrap"><nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li aria-current="page">Motorsport</li></ol></nav>
-<h1>RayTeam Motorsport</h1>
-<p class="lede">The race team of RayTeam Automotive. Its first race was the 2024 Pikes Peak International Hill Climb, in an Audi Group B tribute car built and driven by Laszlo Keskeny.</p>
+<section class="page-hero page-hero--black page-hero--media on-black"><div class="wrap"><nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li aria-current="page">Motorsport</li></ol></nav>
+<div><h1>RayTeam Motorsport</h1>
+<p class="lede">The race team of RayTeam Automotive. Its first race was the 2024 Pikes Peak International Hill Climb, in an Audi Group B tribute car built and driven by Laszlo Keskeny.</p></div>
+<figure class="shot"><img src="img/photos/race-front.webp" alt="The number 10 Audi Group B tribute car at speed on a wooded hill climb road" width="900" height="900" fetchpriority="high"></figure>
 </div></section>
 <section class="band on-black" style="padding-top:0" aria-labelledby="h-time"><div class="wrap split split--even">
 <div class="stack"><h2 id="h-time" class="skip">Pikes Peak 2024 result</h2>
@@ -368,6 +398,12 @@ p{max-width:68ch}
 <text x="626" y="304" text-anchor="end">in 12.42 miles, one tick each</text>
 </svg></figure>
 </div></section>
+<section class="band on-black" style="padding-top:0" aria-labelledby="h-watch"><div class="wrap feature">
+<figure class="video"><a class="video__link" href="https://www.youtube.com/watch?v=7SrgvYEbTWo" data-yt="7SrgvYEbTWo" data-title="POV Racing an Audi S1 E2 up Pikes Peak // Race Day Complete Run" aria-label="Play video: POV Racing an Audi S1 E2 up Pikes Peak // Race Day Complete Run"><img src="img/photos/race-speed-wide.webp" alt="The number 10 Audi at speed on a hill climb course with its lights on" width="960" height="540" loading="lazy" decoding="async"><span class="video__play" aria-hidden="true"></span></a><figcaption>POV Racing an Audi S1 E2 up Pikes Peak // Race Day Complete Run</figcaption></figure>
+<div class="stack"><h2 id="h-watch">Ride along</h2>
+<p class="lede">A point-of-view film of the complete race-day run up Pikes Peak, published on the team's own channel.</p>
+<p><a class="btn btn--ghost" href="https://www.youtube.com/@Rayteammotorsport">RayTeam on YouTube</a></p></div>
+</div></section>
 <section class="band" aria-labelledby="h-record"><div class="wrap split">
 <div class="stack"><h2 id="h-record">Race record</h2>
 <p>Two seasons in, the team has gone from one car to two.</p></div>
@@ -375,24 +411,32 @@ p{max-width:68ch}
 <li><time datetime="2024-06-23">June 23, 2024</time><div><h3>102nd Pikes Peak International Hill Climb, Colorado</h3>
 <p>The team's first race. Laszlo Keskeny, a Pikes Peak rookie, drove a 1986 Audi 4000 built as a Group B Audi Sport Quattro tribute to the summit in 12:57.142, 14th in the Pikes Peak Open division.</p></div></li>
 <li><time datetime="2024-09-07">September 7, 2024</time><div><h3>Mt. Ascutney Hillclimb, Vermont</h3>
-<p>Second event on the team's 2024 calendar.</p></div></li>
+<p>Episode 1 of the team's hill climb campaign series.</p></div></li>
 <li><time datetime="2024-10-20">October 20, 2024</time><div><h3>Okemo Hillclimb, Vermont</h3>
-<p>Third event on the team's 2024 calendar.</p></div></li>
+<p>Episode 2 of the campaign series.</p></div></li>
 <li><time datetime="2025-06">June 2025</time><div><h3>103rd Pikes Peak International Hill Climb, Colorado</h3>
 <p>The second campaign grew from one Group B tribute car to two. Rookie Alex Kim entered an Audi S1 E2 tribute with the team, as RACER reported ahead of the race.</p></div></li>
 </ol>
 </div></section>
-<section class="band band--floor" aria-labelledby="h-cars"><div class="wrap split">
-<div class="stack"><h2 id="h-cars">The cars</h2></div>
-<div class="prose">
-<h3 style="margin-top:0">1986 Audi S1 E2</h3>
-<p>The S1 E2 was Audi's Group B rally car: a turbocharged five-cylinder engine and all-wheel drive in a short, wide body with a large rear wing. The team's car is a tribute to it, and it is the shape that climbed Pikes Peak in 2024.</p>
+<section class="band band--floor" aria-labelledby="h-videos"><div class="wrap">
+<div class="head"><h2 id="h-videos">Films from the campaign</h2>
+<p class="lede">Each video loads from YouTube when you press play. The channel also covers the Burke Mountain Hillclimb, ice racing, and the 2026 Climb to the Clouds.</p></div>
+<ul class="videos"><li><figure class="video"><a class="video__link" href="https://www.youtube.com/watch?v=8AyYSXpB9d4" data-yt="8AyYSXpB9d4" data-title="FOR THE LOVE OF GROUP B // The Audi S1 returns to Pikes Peak" aria-label="Play video: FOR THE LOVE OF GROUP B // The Audi S1 returns to Pikes Peak"><img src="img/photos/race-front-wide.webp" alt="Front view of the number 10 Audi on a wooded hill climb road" width="960" height="540" loading="lazy" decoding="async"><span class="video__play" aria-hidden="true"></span></a><figcaption>FOR THE LOVE OF GROUP B // The Audi S1 returns to Pikes Peak</figcaption></figure></li><li><figure class="video"><a class="video__link" href="https://www.youtube.com/watch?v=hCUqlmdtqOY" data-yt="hCUqlmdtqOY" data-title="The Audi S1 E2 Hillclimb Campaign: Mt. Ascutney // Ep.1" aria-label="Play video: The Audi S1 E2 Hillclimb Campaign: Mt. Ascutney // Ep.1"><img src="img/photos/ascutney-dusk-wide.webp" alt="The car climbing a narrow road at dusk" width="960" height="540" loading="lazy" decoding="async"><span class="video__play" aria-hidden="true"></span></a><figcaption>The Audi S1 E2 Hillclimb Campaign: Mt. Ascutney // Ep.1</figcaption></figure></li><li><figure class="video"><a class="video__link" href="https://www.youtube.com/watch?v=TlniCysixso" data-yt="TlniCysixso" data-title="Group B Rally at Okemo Mountain Hillclimb // AUDI S1 Campaign Ep. 2" aria-label="Play video: Group B Rally at Okemo Mountain Hillclimb // AUDI S1 Campaign Ep. 2"><img src="img/photos/okemo-wide.webp" alt="The number 10 car parked among autumn trees" width="960" height="540" loading="lazy" decoding="async"><span class="video__play" aria-hidden="true"></span></a><figcaption>Group B Rally at Okemo Mountain Hillclimb // AUDI S1 Campaign Ep. 2</figcaption></figure></li><li><figure class="video"><a class="video__link" href="https://www.youtube.com/watch?v=W9V_nCBOPy4" data-yt="W9V_nCBOPy4" data-title="144 Hours to Rebuild an Audi S1 E2 - Okemo Hillclimb" aria-label="Play video: 144 Hours to Rebuild an Audi S1 E2 - Okemo Hillclimb"><img src="img/photos/race-car-lift-wide.webp" alt="The Audi tribute car raised on a lift in the Waltham shop" width="960" height="540" loading="lazy" decoding="async"><span class="video__play" aria-hidden="true"></span></a><figcaption>144 Hours to Rebuild an Audi S1 E2 - Okemo Hillclimb</figcaption></figure></li><li><figure class="video"><a class="video__link" href="https://www.youtube.com/watch?v=vswKGdNbkDg" data-yt="vswKGdNbkDg" data-title="New Driver, Mods, Dyno, &amp; Testing - The Road To Pikes Peak" aria-label="Play video: New Driver, Mods, Dyno, &amp; Testing - The Road To Pikes Peak"><img src="img/photos/race-underside-wide.webp" alt="A technician working under the raised race car" width="960" height="540" loading="lazy" decoding="async"><span class="video__play" aria-hidden="true"></span></a><figcaption>New Driver, Mods, Dyno, &amp; Testing - The Road To Pikes Peak</figcaption></figure></li><li><figure class="video"><a class="video__link" href="https://www.youtube.com/watch?v=RAI3NqXgSys" data-yt="RAI3NqXgSys" data-title="Our Group A Audi Quattro Rally Car Goes Ice Racing" aria-label="Play video: Our Group A Audi Quattro Rally Car Goes Ice Racing"><img src="img/photos/ur-quattro-wide.webp" alt="A white and blue Audi Quattro rally car parked in the shop" width="800" height="450" loading="lazy" decoding="async"><span class="video__play" aria-hidden="true"></span></a><figcaption>Our Group A Audi Quattro Rally Car Goes Ice Racing</figcaption></figure></li></ul>
+</div></section>
+<section class="band" aria-labelledby="h-cars"><div class="wrap">
+<div class="head"><h2 id="h-cars">The cars</h2></div>
+<div class="split split--even">
+<div class="stack"><figure class="shot"><img src="img/photos/race-car-lift.webp" alt="The number 10 Audi Group B tribute car raised on a lift in the Waltham shop" width="960" height="720" loading="lazy" decoding="async"></figure>
+<h3>1986 Audi S1 E2</h3>
+<p>The S1 E2 was Audi's Group B rally car: a turbocharged five-cylinder engine and all-wheel drive in a short, wide body with a large rear wing. The team's car is a tribute to it, and it is the shape that climbed Pikes Peak in 2024.</p></div>
+<div class="stack"><div style="max-width:420px"><figure class="shot"><img src="img/photos/ur-quattro.webp" alt="A white and blue Audi UR Quattro rally car parked in the shop" width="600" height="800" loading="lazy" decoding="async"></figure></div>
 <h3>1987 Audi UR Quattro</h3>
 <p>The road car that started it. The original Quattro put all-wheel drive into a performance coupe and changed rallying.</p>
-<p>Race footage is on the team's <a href="https://www.youtube.com/@Rayteammotorsport">YouTube channel</a>, and sponsorship details are at <a href="https://rayteammotorsport.com/">rayteammotorsport.com</a>.</p>
+<p>Sponsorship details are at <a href="https://rayteammotorsport.com/">rayteammotorsport.com</a>.</p></div>
 </div>
+<ul class="gallery" style="margin-top:clamp(32px,4vw,56px)"><li><figure class="shot"><img src="img/photos/race-bend.webp" alt="The number 10 Audi rounding a bend on a wooded hill climb road" width="900" height="900" loading="lazy" decoding="async"></figure></li><li><figure class="shot"><img src="img/photos/race-wing.webp" alt="Rear of the Audi tribute car in the shop, showing its large rear wing" width="600" height="800" loading="lazy" decoding="async"></figure></li><li><figure class="shot"><img src="img/photos/race-rear.webp" alt="The car heading away up a narrow road through the trees" width="800" height="800" loading="lazy" decoding="async"></figure></li><li><figure class="shot"><img src="img/photos/race-trailer.webp" alt="The car strapped down inside its transport trailer" width="800" height="600" loading="lazy" decoding="async"></figure></li></ul>
 </div></section>
-<section class="band" aria-labelledby="h-src"><div class="wrap split">
+<section class="band band--floor" aria-labelledby="h-src"><div class="wrap split">
 <div class="stack"><h2 id="h-src">Sources</h2></div>
 <ul class="index" style="grid-template-columns:1fr"><li><a href="https://ppihc.org/?p=18526">Pikes Peak International Hill Climb: Laszlo Keskeny pays homage to Audi legends on Pikes Peak</a></li><li><a href="https://ppihc.org/wp-content/uploads/2024-PPIHC-Overall-Results.pdf">2024 PPIHC official overall results (PDF)</a></li><li><a href="https://racer.com/2025/06/06/kim-doubles-vintage-quattro-fun-in-pikes-peak-debut">RACER: Kim doubles vintage Quattro fun in Pikes Peak debut</a></li><li><a href="https://rayteammotorsport.com/">RayTeam Motorsport</a></li></ul>
 </div></section>
@@ -444,6 +488,9 @@ if(mb)mb.addEventListener('click',function(){var on=nav.classList.toggle('is-ope
 var cl=d.querySelectorAll('.climb');
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target)}})},{threshold:.4});
 cl.forEach(function(x){io.observe(x)})}else{cl.forEach(function(x){x.classList.add('is-in')})}
+d.querySelectorAll('[data-yt]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();
+var f=d.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+a.getAttribute('data-yt')+'?autoplay=1&rel=0';
+f.title=a.getAttribute('data-title');f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;a.parentNode.replaceChild(f,a)})});
 var m=d.querySelector('[data-map]');
 if(m)m.querySelector('button').addEventListener('click',function(){m.classList.add('is-live');
 m.innerHTML='<iframe title="Map showing RayTeam Automotive at 175 High Street, Waltham" loading="lazy" src="'+m.getAttribute('data-map')+'"></iframe>'});
